@@ -72,7 +72,7 @@ class SendToValidation
                 ],
             ],
             'certificates'=>[],
-            "hall"=>1,
+            "hall"=> $this->demande->juridiction_id,
             'request'=> $this->demande->id,
         ]);
         if($res->status() == 200){

@@ -16,6 +16,7 @@ class JuridictionSeeder extends Seeder
     public function run()
     {
         DB::table('juridictions')->insert([
+            ["nom"=>"Tribunal de Dabou", "type"=>1],
             ["nom"=>"Tribunal de première instance d’Abidjan", "type"=>1],
             ["nom"=>"Tribunal de première instance de Yopougon", "type"=>1],
             ["nom"=>"Tribunal de première instance d’Abengourou", "type"=>1],
