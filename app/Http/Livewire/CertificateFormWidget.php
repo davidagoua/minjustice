@@ -10,6 +10,7 @@ use App\Models\Juridiction;
 use App\Models\Paiement;
 use App\Models\TypeDocument;
 use App\Notifications\DemandeRegistered;
+use Filament\Facades\Filament;
 use Filament\Forms\Components;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
@@ -25,10 +26,10 @@ class CertificateFormWidget extends Component implements HasForms
 {
     use InteractsWithForms;
     public $juridiction = "";
+    public $transaction_id;
     public $medium="mobile";
     public $contact_debit="";
     public $selected_typeCertificate = 0;
-    public $transaction_id ;
     public $paiement;
     public $document_requis = [
         [
@@ -130,22 +131,7 @@ constatant l'existence du décret "
 
     public function failed()
     {
-        $demande = new Demande();
-        $demande->user()->associate(auth()->user());
-        $demande->juridiction_id = 3;
-        $demande->type_document()->associate($this->document);
-        $demande->save();
-        $paiement = Paiement::create([
-            'user_id' => auth()->id(),
-            'demande_id' => $demande->id,
-            'reference' => $this->transaction_id,
-            'montant' => 50,
-            'contact' => $this->contact_debit,
-        ]);
-
-        SendToValidation::run(auth()->user(), $demande);
-        auth()->user()->notify(new DemandeRegistered($demande));
-        return redirect()->route('dashboard')->with('error', $this->document->intitule);
+        Filament::notify('error', "Paiement non validé");
     }
 
     public function save()
@@ -161,10 +147,10 @@ constatant l'existence du décret "
             'user_id' => auth()->id(),
             'demande_id' => $demande->id,
             'reference' => $this->transaction_id,
-            'montant' => 50,
+            'montant' => 100,
             'contact' => $this->contact_debit,
         ]);
-
+        Filament::notify('error', "Paiement non validé");
         SendToValidation::run(auth()->user(), $demande);
         auth()->user()->notify(new DemandeRegistered($demande));
         return redirect()->route('dashboard')->with('demande_registered', $this->document->intitule);
@@ -224,13 +210,7 @@ constatant l'existence du décret "
         ];
     }
 
-    public function callCinetPay()
-    {
-        return redirect()->route('paiementForm')->with([
-            'amount'=>150,
-            'transaction_id'=>"2345678098765RGHJJ"
-        ]);
-    }
+
 
     public function render()
     {

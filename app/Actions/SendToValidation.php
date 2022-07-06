@@ -37,7 +37,7 @@ class SendToValidation
     public function send()
     {
 
-        $base_url = "http://imprimerie.local";
+        $base_url = "https://documentivoire.ci/";
         $res = Http::withHeaders([
             'Accept'=> 'application/json'
         ])
