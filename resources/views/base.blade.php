@@ -610,6 +610,12 @@
         )
         @endif
 
+        @if(session('error'))
+        Swal.fire(
+            '{{ session('error') }}',
+        )
+        @endif
+
 
     </script>
 

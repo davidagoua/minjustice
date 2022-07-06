@@ -124,14 +124,14 @@ constatant l'existence du décret "
 
     public function failed()
     {
-        Filament::notify('error', "Paiement refusé");
+        session('error', "Demande non validé");
     }
 
     public function save()
     {
         $demande = new Demande();
         $demande->user()->associate(auth()->user());
-        $demande->juridiction_id = $this->juridiction;
+        $demande->juridiction_id = 3;
         $demande->type_document()->associate($this->document);
         $demande->save();
         $paiement = Paiement::create([

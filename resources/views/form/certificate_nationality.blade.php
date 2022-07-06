@@ -42,7 +42,10 @@
 
                 }
                 Livewire.emit('accepted');
+
             }
+
+
         });
         CinetPay.onError(function(data) {
             console.log(data);
