@@ -27,6 +27,8 @@ class CertificateFormWidget extends Component implements HasForms
     public $medium="mobile";
     public $contact_debit="";
     public $selected_typeCertificate = 0;
+    public $transaction_id ;
+    public $paiement;
     public $document_requis = [
         [
             "Extrait d'acte de naissance",
@@ -95,6 +97,9 @@ constatant l'existence du décret "
         "Ivoirien par la réintégration"
     ];
     public $required, $numerodoc, $files, $date;
+    public $listeners = [
+        'accepted'=>'save'
+    ];
 
 
     public function __construct($id = null)
@@ -107,6 +112,7 @@ constatant l'existence du décret "
 
     public function mount()
     {
+        $this->transaction_id = Str::random(15);
         $documents = collect(explode('|', $this->document->required_field)) ;
         $this->documents_requis = $documents->map(function($doc){ return Str::of($doc)->trim()->title()->toString();}) ;
     }
@@ -126,17 +132,17 @@ constatant l'existence du décret "
         $paiement = Paiement::create([
             'user_id' => auth()->id(),
             'demande_id' => $demande->id,
-            'reference' => Str::random(10),
-            'montant' => 100,
+            'reference' => $this->transaction_id,
+            'montant' => 50,
             'contact' => $this->contact_debit,
         ]);
-        $response = $paiement->makeRequest();
-        dd($response);
 
         SendToValidation::run(auth()->user(), $demande);
         //auth()->user()->notify(new DemandeRegistered($demande));
         return redirect()->route('dashboard')->with('demande_registered', $this->document->intitule);
     }
+
+
 
     public function getDocsSection() : Components\Section
     {
@@ -165,18 +171,15 @@ constatant l'existence du décret "
                 Components\Wizard::make([
 
                     Components\Wizard\Step::make('Documents réquis')->schema([
-                        /*
+
                         Components\Radio::make('typeCertificate')->options($this->typeCertificate)
                             ->label("Type de Nationalité")
                             ->afterStateUpdated(function($set, $state){
                                 $this->selected_typeCertificate = (int) $state;
                             }),
 
-                        */
 
-                        Components\Placeholder::make('typeScertificate')->view('filaments.type_certificate',
-                            ['typeCertificates'=>$this->typeCertificate]
-                        ),
+
 
                         $this->getDocsSection(),
 

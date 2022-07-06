@@ -23,8 +23,8 @@
             mode: 'PRODUCTION'
         });
         CinetPay.getCheckout({
-            transaction_id: Math.floor(Math.random() * 100000000).toString(), // YOUR TRANSACTION ID
-            amount: 100,
+            transaction_id: "{{ $transaction_id }}", // YOUR TRANSACTION ID
+            amount: 50,
             currency: 'XOF',
             channels: 'MOBILE_MONEY',
             description: 'Test de paiement',
@@ -38,7 +38,7 @@
                 }
             } else if (data.status == "ACCEPTED") {
                 if (alert("Votre paiement a été effectué avec succès")) {
-                    window.location.reload();
+                    Livewire.emit('accepted');
                 }
             }
         });
