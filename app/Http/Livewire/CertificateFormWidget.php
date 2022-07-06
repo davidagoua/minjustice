@@ -26,6 +26,7 @@ class CertificateFormWidget extends Component implements HasForms
 {
     use InteractsWithForms;
     public $juridiction = "";
+    public $isPaided = false;
     public $transaction_id;
     public $medium="mobile";
     public $contact_debit="";
@@ -136,7 +137,7 @@ constatant l'existence du décret "
 
     public function save()
     {
-
+        $this->isPaided = true;
         $state = $this->form->getState();
         $demande = new Demande();
         $demande->user()->associate(auth()->user());

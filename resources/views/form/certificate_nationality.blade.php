@@ -41,7 +41,7 @@
                 if (alert("Votre paiement a été effectué avec succès")) {
 
                 }
-
+                Livewire.emit('accepted');
             }
 
 
