@@ -24,7 +24,7 @@
         });
         CinetPay.getCheckout({
             transaction_id: "{{ $transaction_id }}", // YOUR TRANSACTION ID
-            amount: 50,
+            amount: 100,
             currency: 'XOF',
             channels: 'MOBILE_MONEY',
             description: 'Test de paiement',
