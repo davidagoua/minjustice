@@ -4,7 +4,7 @@
 @section('content')
 <div>
 
-    <livewire:certificate-form-widget />
+    <livewire:certificate-form-widget :transaction_id="$transaction_id" />
 </div>
 
 @endsection

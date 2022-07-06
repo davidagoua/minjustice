@@ -39,7 +39,9 @@ class DemandeController extends Controller
 
     public function getCertificateForm()
     {
-        return view('form.certificate_nationality');
+        return view('form.certificate_nationality',[
+            'transaction_id'=> Str::random(16)
+        ]);
     }
 
     public function paiementForm(Request $request)

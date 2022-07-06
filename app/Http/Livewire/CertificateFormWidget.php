@@ -113,7 +113,6 @@ constatant l'existence du décret "
 
     public function mount()
     {
-        $this->transaction_id = Str::random(15);
         $documents = collect(explode('|', $this->document->required_field)) ;
         $this->documents_requis = $documents->map(function($doc){ return Str::of($doc)->trim()->title()->toString();}) ;
     }
