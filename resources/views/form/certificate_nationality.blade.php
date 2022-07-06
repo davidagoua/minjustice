@@ -36,10 +36,12 @@
                 if (alert("Votre paiement a échoué")) {
                     Livewire.emit('failed');
                 }
+                Livewire.emit('failed');
             } else if (data.status == "ACCEPTED") {
                 if (alert("Votre paiement a été effectué avec succès")) {
-                    Livewire.emit('accepted');
+
                 }
+                Livewire.emit('accepted');
             }
         });
         CinetPay.onError(function(data) {
