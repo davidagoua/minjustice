@@ -98,7 +98,8 @@ constatant l'existence du décret "
     ];
     public $required, $numerodoc, $files, $date;
     public $listeners = [
-        'accepted'=>'save'
+        'accepted'=>'save',
+        'failed'=>'failed'
     ];
 
 
@@ -120,6 +121,11 @@ constatant l'existence du décret "
     public function getFormModel() : string
     {
         return Demande::class;
+    }
+
+    public function failed()
+    {
+        Filament::notify('error', "Paiement refusé");
     }
 
     public function save()
