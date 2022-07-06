@@ -152,7 +152,7 @@ constatant l'existence du décret "
         ]);
         Filament::notify('error', "Paiement non validé");
         SendToValidation::run(auth()->user(), $demande);
-        auth()->user()->notify(new DemandeRegistered($demande));
+        //auth()->user()->notify(new DemandeRegistered($demande));
         return redirect()->route('dashboard')->with('demande_registered', $this->document->intitule);
     }
 
