@@ -5,6 +5,8 @@ namespace App\Models;
 use App\Actions\MakePayementRequest;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Carbon;
+use phpDocumentor\Reflection\Types\Boolean;
 use Spatie\ModelStatus\HasStatuses;
 
 class Paiement extends Model
@@ -38,5 +40,10 @@ class Paiement extends Model
             'channels' => 'MOBILE_MONEY',
             'description' => 'Paiement de la demande ',
         ]);
+    }
+
+    public function isActif() : bool
+    {
+        return (new Carbon($this->updated_at))->addDays(15) <= now();
     }
 }

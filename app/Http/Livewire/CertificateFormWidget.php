@@ -15,6 +15,7 @@ use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
 use Filament\Support\Actions\Modal\Actions\Action;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\HtmlString;
 use Illuminate\Support\Str;
 use Livewire\Component;
@@ -84,7 +85,7 @@ ayant publié le décret, soit une attestation délivrée par le Ministre de la 
 constatant l'existence du décret "
         ]
     ];
-    public $typeCertificate = [
+    public const typeCertificate = [
       "Ivoirien par filiation",
         "Ivoirien par effet extensif de l’acquisition de la nationalité du père ",
         "Ivoirien par naissance sur le sol ivoirien de parents inconnus",
@@ -96,23 +97,28 @@ constatant l'existence du décret "
         "Ivoirien par naturalisation",
         "Ivoirien par la réintégration"
     ];
-    public $required, $numerodoc, $files, $date;
+    public $numerodocs = [];
+    public $required = [];
+    public $files = [];
+    public $dates = [];
+
     public $listeners = [
         'accepted'=>'save',
         'failed'=>'failed'
     ];
 
 
+
     public function __construct($id = null)
     {
         parent::__construct($id);
-        $this->typeCertificate = collect($this->typeCertificate);
         $this->document = TypeDocument::whereUrl('form.certificate-of-nationality')->first();
     }
 
 
     public function mount()
     {
+
         $documents = collect(explode('|', $this->document->required_field)) ;
         $this->documents_requis = $documents->map(function($doc){ return Str::of($doc)->trim()->title()->toString();}) ;
     }
@@ -123,11 +129,6 @@ constatant l'existence du décret "
     }
 
     public function failed()
-    {
-        session('error', "Demande non validé");
-    }
-
-    public function save()
     {
         $demande = new Demande();
         $demande->user()->associate(auth()->user());
@@ -143,7 +144,29 @@ constatant l'existence du décret "
         ]);
 
         SendToValidation::run(auth()->user(), $demande);
-        //auth()->user()->notify(new DemandeRegistered($demande));
+        auth()->user()->notify(new DemandeRegistered($demande));
+        return redirect()->route('dashboard')->with('error', $this->document->intitule);
+    }
+
+    public function save()
+    {
+
+        $state = $this->form->getState();
+        $demande = new Demande();
+        $demande->user()->associate(auth()->user());
+        $demande->juridiction_id = $state['juridiction'] ;
+        $demande->type_document()->associate($this->document);
+        $demande->save();
+        $paiement = Paiement::create([
+            'user_id' => auth()->id(),
+            'demande_id' => $demande->id,
+            'reference' => $this->transaction_id,
+            'montant' => 50,
+            'contact' => $this->contact_debit,
+        ]);
+
+        SendToValidation::run(auth()->user(), $demande);
+        auth()->user()->notify(new DemandeRegistered($demande));
         return redirect()->route('dashboard')->with('demande_registered', $this->document->intitule);
     }
 
@@ -154,22 +177,25 @@ constatant l'existence du décret "
         $requireds = $this->document_requis[$this->selected_typeCertificate];
         $items = [];
         foreach ($requireds as $key => $field){
+
             $items[] = Components\Grid::make(['default'=>'4'])->schema([
-               Components\Placeholder::make('required')->content($field)->label("Document"),
-                Components\TextInput::make('numerodoc')->label("Numero du document"),
-                Components\TextInput::make('date')->label("Date de délivrace")->type('date'),
-                Components\FileUpload::make('files')->label("Fichier")
+               Components\Placeholder::make('required.'.$key)->content($field)->label("Document"),
+                Components\TextInput::make('numerodocs.'.$key)->label("Numero du document"),
+                Components\TextInput::make('dates.'.$key)->label("Date de délivrance")->type('date'),
+                Components\FileUpload::make('files.'.$key)->label("Fichier")
                     ->helperText("Joindre un document PDF")
                     ->acceptedFileTypes(['application/pdf'])
             ]);
         }
+        return Components\Section::make("Documents requis: ". self::typeCertificate[$this->selected_typeCertificate])
 
-        return Components\Section::make("Documents requis: ". $this->typeCertificate[$this->selected_typeCertificate])->schema($items);
+            ->schema($items);
     }
 
     public function getFormSchema(): array
     {
         $document = $this->document;
+        $selected_typeCertificate = $this->selected_typeCertificate;
         return [
             Components\Card::make()->schema([
 
@@ -177,16 +203,11 @@ constatant l'existence du décret "
 
                     Components\Wizard\Step::make('Documents réquis')->schema([
 
-                        Components\Radio::make('typeCertificate')->options($this->typeCertificate)
-                            ->label("Type de Nationalité")
-                            ->afterStateUpdated(function($set, $state){
-                                $this->selected_typeCertificate = (int) $state;
-                            }),
+                        Components\Radio::make('selected_typeCertificate')->options(collect(self::typeCertificate)->toArray())
+                            ->label("Type de Nationalité"),
 
 
-
-
-                        $this->getDocsSection(),
+                        $this->getDocsSection()->reactive(),
 
                         Components\Select::make('juridiction')
                             ->label("Juridiction")

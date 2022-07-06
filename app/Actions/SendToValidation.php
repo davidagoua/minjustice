@@ -24,6 +24,10 @@ use Lorisleiva\Actions\Concerns\AsAction;
  *
  */
 
+
+
+
+
 class SendToValidation
 {
     use AsAction;
@@ -40,7 +44,7 @@ class SendToValidation
         ->post("$base_url/api/documents", [
             'type'=>[
                 'model'=>  'certificate-of-nationality',
-                'tag'=> $this->demande->type_document->tag,
+                'tag'=> null,
             ],
             'id'=> auth()->Id(),
             'data'=> [
