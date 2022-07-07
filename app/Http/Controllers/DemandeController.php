@@ -86,7 +86,7 @@ class DemandeController extends Controller
             }else{
                 $document->path = "";
             }
-            $document->path = public_path("storage/document_".$demande->id.".pdf");
+            $document->path = 'documents_termines/documents_'.$demande->id.'.pdf';
             $document->save();
 
             //filtre par type de document
@@ -97,8 +97,8 @@ class DemandeController extends Controller
                 'juridiction'=>$request->json('hall.name'),
                 'user'=> $demande->user
             ]);
-            Storage::disk('s3')->put('documents_termines/documents_'.$document->id.'.pdf', $pdf->output());
-            $pdf->save($document->path);
+            Storage::disk('s3')->put($document->path, $pdf->output());
+
         }
         return response()->json("OK", 200);
     }
