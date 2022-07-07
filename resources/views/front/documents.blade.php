@@ -112,7 +112,7 @@
                                             </div>
                                         </div>
                                     @endforelse
-                                    
+
                                 </div>
 
                                 <!--Table Pagination-->
