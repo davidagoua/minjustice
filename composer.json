@@ -20,7 +20,9 @@
         "lorisleiva/laravel-actions": "^2.4",
         "simplesoftwareio/simple-qrcode": "^4.2",
         "spatie/laravel-model-status": "^1.11",
-        "tcg/voyager": "^1.5"
+        "tcg/voyager": "^1.5",
+        "ext-mbstring": "*",
+        "ext-imagick": "*"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",
