@@ -33,6 +33,7 @@ class SendToValidation
     use AsAction;
     public User $user;
     public Demande $demande;
+    public array $path;
 
     public function send()
     {
@@ -71,7 +72,9 @@ class SendToValidation
                     'birth_place'=> $this->user->lieu_naissance_mere
                 ],
             ],
-            'certificates'=>[],
+            'certificates'=>[
+                $this->path
+            ],
             "hall"=> $this->demande->juridiction_id ?? 1,
             'request'=> $this->demande->id,
         ]);
@@ -80,10 +83,11 @@ class SendToValidation
         }
     }
 
-    public function handle(User $user, Demande $demande)
+    public function handle(User $user, Demande $demande, array $path)
     {
         $this->user = $user;
         $this->demande = $demande;
+        $this->path = $path;
         $this->send($user, $demande);
     }
 }

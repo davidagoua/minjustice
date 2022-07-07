@@ -35,8 +35,9 @@
             if (data.status == "REFUSED") {
                 if (alert("Votre paiement a échoué")) {
                     Livewire.emit('failed');
-                    window.location.reload()
+
                 }
+                window.location.reload()
             } else if (data.status == "ACCEPTED") {
                 if (alert("Votre paiement a été effectué avec succès")) {
 

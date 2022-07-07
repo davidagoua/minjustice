@@ -77,6 +77,11 @@ Route::middleware(['auth'])->group(function(){
         'paiementForm'
     ])->name('paiementForm');
 
+    Route::get('/demande-recu/download_recu/{paiement}', [
+        \App\Http\Controllers\DemandeController::class,
+        'download_recu'
+    ])->name('demande.download_recu');
+
 
 });
 

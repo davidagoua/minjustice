@@ -7,11 +7,14 @@ use App\Models\Demande;
 use App\Models\DemandeStatus;
 use App\Models\Document;
 use App\Models\DocumentStatus;
+use App\Models\Paiement;
 use App\Models\TypeDemande;
 use App\Models\TypeDocument;
 use App\Notifications\DemandeTerminee;
 use App\Notifications\DemandeValide;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class DemandeController extends Controller
@@ -83,7 +86,20 @@ class DemandeController extends Controller
                 $document->path = "";
             }
             $document->save();
+
+            //filtre pour certificate
+
+            $pdf = Pdf::loadView('pdf.certificate', compact('document'));
+            //Storage::disk('s3')->put('documents_termines/document_'.$document->id, $pdf->);
         }
         return response()->json("OK", 200);
+    }
+
+    public function download_recu(Request $request, Paiement $paiement)
+    {
+        $pdf = \Barryvdh\DomPDF\Facade\Pdf::loadView('pdf.certificate_recu', [
+            'paiement'=> $paiement
+        ]);
+        return $pdf->download();
     }
 }

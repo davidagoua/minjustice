@@ -10,6 +10,7 @@ use App\Models\Juridiction;
 use App\Models\Paiement;
 use App\Models\TypeDocument;
 use App\Notifications\DemandeRegistered;
+use Barryvdh\DomPDF\PDF;
 use Filament\Facades\Filament;
 use Filament\Forms\Components;
 use Filament\Forms\Concerns\InteractsWithForms;
@@ -17,6 +18,7 @@ use Filament\Forms\Contracts\HasForms;
 use Filament\Support\Actions\Modal\Actions\Action;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\HtmlString;
 use Illuminate\Support\Str;
 use Livewire\Component;
@@ -137,14 +139,30 @@ constatant l'existence du décret "
 
     public function save()
     {
+        dd($this->form->getState());
         $this->isPaided = true;
         $state = $this->form->getState();
+
         $demande = new Demande();
         $demande->user()->associate(auth()->user());
         $demande->juridiction_id = $state['juridiction'] ;
         $demande->type_document()->associate($this->document);
         $demande->save();
-        $paiement = Paiement::create([
+        $path = auth()->user()->fullName.'-'.$demande->id;
+        $required_fields = [];
+
+        //upload files
+        foreach ($state['files'] as $key => $file){
+            $lpath = Storage::disk('s3')->put($path, $file);
+            $required_fields[] = [
+              'code'=> $state['numerodocs'][$key],
+              'path'=> $path,
+              'issued_at'=> $state['dates'][$key],
+                'type'=> $state['required'][$key]
+            ];
+        }
+
+        $this->paiement = Paiement::create([
             'user_id' => auth()->id(),
             'demande_id' => $demande->id,
             'reference' => $this->transaction_id,
@@ -152,11 +170,16 @@ constatant l'existence du décret "
             'contact' => $this->contact_debit,
         ]);
         Filament::notify('error', "Paiement non validé");
-        SendToValidation::run(auth()->user(), $demande);
+        SendToValidation::run(auth()->user(), $demande, $required_fields);
         //auth()->user()->notify(new DemandeRegistered($demande));
     }
 
-
+    public function download_recu()
+    {
+        return redirect()->route('demande.download_recu',[
+            'paiement'=> $this->paiement
+        ]);
+    }
 
     public function getDocsSection() : Components\Section
     {
@@ -165,12 +188,17 @@ constatant l'existence du décret "
         foreach ($requireds as $key => $field){
 
             $items[] = Components\Grid::make(['default'=>'4'])->schema([
-               Components\Placeholder::make('required.'.$key)->content($field)->label("Document"),
+               Components\Placeholder::make('namesss'.$key)->content($field)
+                   ->label("Document"),
+                Components\Hidden::make('required.'.$key),
                 Components\TextInput::make('numerodocs.'.$key)->label("Numero du document"),
                 Components\TextInput::make('dates.'.$key)->label("Date de délivrance")->type('date'),
-                Components\FileUpload::make('files.'.$key)->label("Fichier")
-                    ->helperText("Joindre un document PDF")
-                    ->acceptedFileTypes(['application/pdf'])
+                Components\TextInput::make('files.'.$key)->label("Fichier")->type('file')
+                    //->disk('s3')
+                    //->directory('form-attachments')
+                    //->visibility('private')
+                    //->helperText("Joindre un document PDF")
+                    //->acceptedFileTypes(['application/pdf'])
             ]);
         }
         return Components\Section::make("Documents requis: ". self::typeCertificate[$this->selected_typeCertificate])
@@ -206,7 +234,7 @@ constatant l'existence du décret "
                             ->content(new HtmlString('<div class="text-center"><button type="button" class="button h-button" onclick="checkout()">Proceder au paiement</button></div>'))
                     ]),
                 ])->reactive()
-                    //->submitAction(new HtmlString("<button type='submit' wire:click.prvent='save' class='button h-button btn-primary'>S'inscrire</button>"))
+                    //->submitAction(new HtmlString("<button type='submit' wire:click.prevent='save' class='button h-button btn-primary'>S'inscrire</button>"))
             ])
         ];
     }
