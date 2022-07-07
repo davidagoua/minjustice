@@ -17,24 +17,17 @@ services:
     networks:
       - zerowitt
 
-  db_pgsql:
-      image: postgres:latest
-      env_file:
-          -   .env
-      volumes:
-          -   dbdata:var/lib/postgresql
-      ports:
-          -   5432:5432
+
 
   db_mysq:
     image: mysql:5.7
     env_file:
         -   .env
     environment:
-      MYSQL_DATABASE: tracetube
-      MYSQL_ROOT_PASSWORD: tracetube
-      MYSQL_PASSWORD: trcaetube
-      MYSQL_USER: tracetube
+      MYSQL_DATABASE: minjustice
+      MYSQL_ROOT_PASSWORD: minjustice
+      MYSQL_PASSWORD: minjustice
+      MYSQL_USER: minjustice
       SERVICE_TAGS: dev
       SERVICE_NAME: mysql
     volumes:
@@ -60,7 +53,7 @@ services:
       - zerowitt
 
 networks:
-  lahmi:
+  zerowitt:
     driver: bridge
 
 volumes:

@@ -10,6 +10,6 @@ class DocumentController extends Controller
 {
     public function download(Document $document)
     {
-        return Storage::download($document->path);
+        return Storage::disk('s3')->download($document->path);
     }
 }

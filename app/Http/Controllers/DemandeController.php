@@ -97,6 +97,7 @@ class DemandeController extends Controller
                 'juridiction'=>$request->json('hall.name'),
                 'user'=> $demande->user
             ]);
+            Storage::disk('s3')->put('documents_termines/documents_'.$document->id.'.pdf', $pdf->output());
             $pdf->save($document->path);
         }
         return response()->json("OK", 200);
