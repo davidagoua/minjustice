@@ -72,10 +72,8 @@ class SendToValidation
                     'birth_place'=> $this->user->lieu_naissance_mere
                 ],
             ],
-            'certificates'=>[
-                $this->path
-            ],
-            "hall"=> $this->demande->juridiction_id ?? 1,
+            'certificates'=>$this->path,
+            "hall"=>  1,
             'request'=> $this->demande->id,
         ]);
         if($res->status() == 200){

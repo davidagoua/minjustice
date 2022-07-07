@@ -21,7 +21,7 @@ class Paiement extends Model
 
     public function demande()
     {
-        return $this->hasOne(Demande::class);
+        return $this->hasOne(Demande::class, 'paiement_id');
     }
 
     public function document()

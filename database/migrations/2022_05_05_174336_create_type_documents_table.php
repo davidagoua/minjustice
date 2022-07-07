@@ -24,6 +24,7 @@ return new class extends Migration
             $table->json('documents_requis')->nullable();
             $table->string('tag')->nullable();
             $table->string('url')->nullable();
+            $table->unsignedInteger('montant')->default(100);
             $table->unsignedInteger('type_demande_id')->default(1);
             $table->timestamps();
         });

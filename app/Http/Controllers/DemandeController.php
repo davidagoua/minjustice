@@ -85,20 +85,24 @@ class DemandeController extends Controller
             }else{
                 $document->path = "";
             }
+            $document->path = public_path("storage/documents/document_".$demande->id);
             $document->save();
 
-            //filtre pour certificate
+            //filtre par type de document
 
             $pdf = Pdf::loadView('pdf.certificate', compact('document'));
-            //Storage::disk('s3')->put('documents_termines/document_'.$document->id, $pdf->);
+            $pdf->save($document->path);
         }
         return response()->json("OK", 200);
     }
 
     public function download_recu(Request $request, Paiement $paiement)
     {
-        $pdf = \Barryvdh\DomPDF\Facade\Pdf::loadView('pdf.certificate_recu', [
-            'paiement'=> $paiement
+        $demande = $paiement->demande;
+        $type_document = $paiement->demande->type_document;
+
+        $pdf = \Barryvdh\DomPDF\Facade\Pdf::loadView('pdf.certificate_recu',[
+            'paiement'=>$paiement, 'demande'=>$demande, 'type_document'=>$type_document
         ]);
         return $pdf->download();
     }

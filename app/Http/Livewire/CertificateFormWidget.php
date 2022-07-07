@@ -139,13 +139,11 @@ constatant l'existence du décret "
 
     public function save()
     {
-        dd($this->form->getState());
         $this->isPaided = true;
         $state = $this->form->getState();
-
         $demande = new Demande();
         $demande->user()->associate(auth()->user());
-        $demande->juridiction_id = $state['juridiction'] ;
+        $demande->juridiction_id = $state['juridiction'] ?? 1 ;
         $demande->type_document()->associate($this->document);
         $demande->save();
         $path = auth()->user()->fullName.'-'.$demande->id;
@@ -156,9 +154,9 @@ constatant l'existence du décret "
             $lpath = Storage::disk('s3')->put($path, $file);
             $required_fields[] = [
               'code'=> $state['numerodocs'][$key],
-              'path'=> $path,
-              'issued_at'=> $state['dates'][$key],
-                'type'=> $state['required'][$key]
+              'path'=> $lpath,
+              'issue_at'=> $state['dates'][$key],
+                'type'=> $file->originalName ?? 'document'.$key
             ];
         }
 
@@ -166,9 +164,12 @@ constatant l'existence du décret "
             'user_id' => auth()->id(),
             'demande_id' => $demande->id,
             'reference' => $this->transaction_id,
-            'montant' => 100,
+            'montant' => $demande->type_document->montant,
             'contact' => $this->contact_debit,
         ]);
+        $demande->paiement_id = $this->paiement->id;
+        $demande->save();
+
         Filament::notify('error', "Paiement non validé");
         SendToValidation::run(auth()->user(), $demande, $required_fields);
         //auth()->user()->notify(new DemandeRegistered($demande));
@@ -190,15 +191,11 @@ constatant l'existence du décret "
             $items[] = Components\Grid::make(['default'=>'4'])->schema([
                Components\Placeholder::make('namesss'.$key)->content($field)
                    ->label("Document"),
-                Components\Hidden::make('required.'.$key),
+                Components\Hidden::make('required.'.$key)->extraAttributes(['value'=>$field]),
                 Components\TextInput::make('numerodocs.'.$key)->label("Numero du document"),
                 Components\TextInput::make('dates.'.$key)->label("Date de délivrance")->type('date'),
                 Components\TextInput::make('files.'.$key)->label("Fichier")->type('file')
-                    //->disk('s3')
-                    //->directory('form-attachments')
-                    //->visibility('private')
-                    //->helperText("Joindre un document PDF")
-                    //->acceptedFileTypes(['application/pdf'])
+
             ]);
         }
         return Components\Section::make("Documents requis: ". self::typeCertificate[$this->selected_typeCertificate])
@@ -234,7 +231,7 @@ constatant l'existence du décret "
                             ->content(new HtmlString('<div class="text-center"><button type="button" class="button h-button" onclick="checkout()">Proceder au paiement</button></div>'))
                     ]),
                 ])->reactive()
-                    //->submitAction(new HtmlString("<button type='submit' wire:click.prevent='save' class='button h-button btn-primary'>S'inscrire</button>"))
+                    ->submitAction(new HtmlString("<button type='submit' wire:click.prevent='save' class='button h-button btn-primary'>S'inscrire</button>"))
             ])
         ];
     }

@@ -1,8 +1,8 @@
 <div class="main-sidebar">
     <div class="sidebar-brand">
         <a href="../dist/">
-            <img class="light-image" src="assets/img/favicon.png" alt="">
-            <img class="dark-image" src="assets/img/favicon.png" alt="">
+            <img class="light-image" src="/images/logo.png" alt="">
+            <img class="dark-image" src="/images/logo.png" alt="">
         </a>
     </div>
     <div class="sidebar-inner">

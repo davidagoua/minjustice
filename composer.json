@@ -18,6 +18,7 @@
         "league/flysystem-aws-s3-v3": "3.0",
         "livewire/livewire": "^2.10",
         "lorisleiva/laravel-actions": "^2.4",
+        "simplesoftwareio/simple-qrcode": "^4.2",
         "spatie/laravel-model-status": "^1.11",
         "tcg/voyager": "^1.5"
     },

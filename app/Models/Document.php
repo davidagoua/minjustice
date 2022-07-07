@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\ModelStatus\HasStatuses;
@@ -33,6 +34,8 @@ class Document extends Model
 
     public function valideScope($query)
     {
-        return $query->whereDate('created_at' );
+        return $query->whereDate('created_at', "<=", now()->subYears(3));
     }
+
+
 }
