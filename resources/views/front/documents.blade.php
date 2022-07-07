@@ -117,6 +117,7 @@
                                 <!--Table Pagination-->
                                 <nav class="flex-pagination pagination is-rounded" aria-label="pagination">
                                     <a class="pagination-previous">Precedent</a>
+                                    
                                     <a class="pagination-next">Suivant</a>
 
                                 </nav>
