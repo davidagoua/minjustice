@@ -70,12 +70,13 @@ class DemandeController extends Controller
 
             // creer un document  pour la demande
 
+
             $document = new Document([
                 'user_id'=> $demande->user_id,
                 'type_document_id'=> $demande->type_document_id,
                 'date_delivrance' => now(),
                 'demande_id'=> $demande->id,
-                'lieu_delivrance' => $demande->juridition_id,
+                'lieu_delivrance' => $request->json('hall.id'),
             ]);
 
 
@@ -85,7 +86,7 @@ class DemandeController extends Controller
             }else{
                 $document->path = "";
             }
-            $document->path = public_path("storage/documents/document_".$demande->id);
+            $document->path = public_path("storage/document_".$demande->id.".pdf");
             $document->save();
 
             //filtre par type de document
