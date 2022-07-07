@@ -89,57 +89,19 @@
                                             @endif
                                         </div>
                                         <div class="flex-table-cell" data-th="Contacts">
-                                            <span class="light-text">{{ now()  }}</span>
+                                            <span class="light-text">{{ $document->created_at }}</span>
                                         </div>
                                         <div class="flex-table-cell cell-end" data-th="Actions">
                                             <div class="dropdown is-spaced is-dots is-right dropdown-trigger is-pushed-mobile">
-                                                <div class="is-trigger" aria-haspopup="true">
-                                                    <i data-feather="more-vertical"></i>
-                                                </div>
-                                                <div class="dropdown-menu" role="menu">
-                                                    <div class="dropdown-content">
-                                                        @if($document->isValide)
-                                                        <a href="{{ Illuminate\Support\Facades\Storage::url($document->path)  }}" class="dropdown-item is-media">
-                                                            <div class="icon">
-                                                                <i class="lnil lnil-eye"></i>
-                                                            </div>
-                                                            <div class="meta">
-                                                                <span>Voir</span>
-                                                                <span>Visualiser le document</span>
-                                                            </div>
-                                                        </a>
-                                                        <a href="{{ route('documents.download', $document)  }}" class="dropdown-item is-media">
-                                                            <div class="icon">
-                                                                <i class="lnil lnil-download"></i>
-                                                            </div>
-                                                            <div class="meta">
-                                                                <span>Télécharger</span>
-                                                                <span>Télécharger le document</span>
-                                                            </div>
-                                                        </a>
-                                                        <a href="{{ route('documents.download', $document)  }}" class="dropdown-item is-media">
-                                                            <div class="icon">
-                                                                <i class="lnil lnil-download"></i>
-                                                            </div>
-                                                            <div class="meta">
-                                                                <span>Télécharger</span>
-                                                                <span>Télécharger le document</span>
-                                                            </div>
-                                                        </a>
-                                                        @else
-                                                        <a href="#" class="dropdown-item is-media">
-                                                            <div class="icon">
-                                                                <i class="lnil lnil-calendar"></i>
-                                                            </div>
-                                                            <div class="meta">
-                                                                <span>Renouveller</span>
-                                                                <span>Reconduire la validité</span>
-                                                            </div>
-                                                        </a>
-                                                        @endif
-
+                                                <a href="{{ route('documents.download', $document)  }}" class="dropdown-item is-media">
+                                                    <div class="icon">
+                                                        <i class="lnil lnil-download"></i>
                                                     </div>
-                                                </div>
+                                                    <div class="meta">
+                                                        <span>Télécharger</span>
+                                                        <span>Télécharger le document</span>
+                                                    </div>
+                                                </a>
                                             </div>
                                         </div>
                                     </div>
