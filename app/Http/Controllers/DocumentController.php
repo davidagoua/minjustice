@@ -12,6 +12,6 @@ class DocumentController extends Controller
     {
         $url = Storage::disk('s3')->temporaryUrl($document->path, now()->addDays(5));
 
-        return response()->file($url);
+        return response()->download($url);
     }
 }
