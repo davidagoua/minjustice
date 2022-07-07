@@ -8,8 +8,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta http-equiv="x-ua-compatible" content="ie=edge" />
 
-    <title>Minijust</title>
-    <link rel="icon" type="image/png" href="/assets/img/favicon.png" />
+    <title>MinJustice</title>
+    <link rel="icon" type="image/png" href="/images/logo.png" />
 
     <!--Core CSS -->
     <link rel="stylesheet" href="/assets/css/app.css" />

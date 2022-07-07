@@ -59,7 +59,11 @@ class DemandeController extends Controller
             $demande->user->notify(new DemandeValide($demande));
         }elseif ($status == 2){
             $demande->setStatus(DemandeStatus::TERMINE);
-            $demande->user->notify(new DemandeTerminee($demande));
+            try{
+                $demande->user->notify(new DemandeTerminee($demande));
+            }catch (\Exception $e){
+
+            }
 
             // creer un document  pour la demande
 

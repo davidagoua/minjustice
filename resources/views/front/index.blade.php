@@ -7,7 +7,7 @@
     <meta name="description" content="Premium Bootstrap v5.1.3 Landing Page Template" />
     <meta name="keywords" content="bootstrap v5.1.3, premium, marketing, multipurpose" />
     <meta content="Themesdesign" name="author" />
-    <link rel="shortcut icon" href="/images/favicon.ico">
+    <link rel="shortcut icon" href="/images/logo.png">
     <link rel="stylesheet" href="/css/bootstrap.min.css" type="text/css" />
     <link rel="stylesheet" href="/css/aos.css" />
     <link rel="stylesheet" href="/css/swiper-bundle.min.css" />
@@ -24,7 +24,6 @@
         <!-- LOGO -->
         <a class="navbar-brand text-uppercase" href="/">
             <img class="logo-light" src="/images/logo.png" alt="" height="50">
-            <img class="logo-dark" src="/images/logo.png" alt="" height="50">
         </a>
 
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
@@ -55,7 +54,7 @@
                 Inscription
             </a>
             <button type="button" class="btn btn-primary nav-btn" data-bs-toggle="modal" data-bs-target="#exampleModalLong1">
-                Connextion
+                Connexion
             </button>
         </div>
     </div>
@@ -129,13 +128,16 @@
                     <div data-aos="" data-aos-duration="1800">
                         <form method="post" action="{{ route('login') }}" class="contact-form" name="myForm" id="myForm">
                             @csrf
+                            <div>
+                                @error('email') <small class="text-red-400"> {{ $message }}</small> @enderror
+                            </div>
                             <div class="row rounded-3 py-3">
                                 <div class="col-lg-12">
                                     <div class="position-relative mb-3">
                                         <span class="input-group-text"><i class="mdi mdi-at"></i></span>
                                         <input name="email" id="name" type="email" class="form-control border" placeholder="Entrez votre Email">
                                     </div>
-                                    @error('email') <small class="text-red-400"> {{ $message }}</small> @enderror
+
                                 </div>
 
                                 <div class="col-lg-12">
@@ -525,7 +527,7 @@
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-lg-6 col-sm-10 text-center">
-                    <a href="javascript:void(0)"><img src="/images/logo-light.png" height="100" alt=""></a>
+                    <a href="javascript:void(0)"><img src="/images/logo.png" height="100" alt=""></a>
                     <p class="mx-auto mt-sm-4">Obtenez vos documents administratifs en ligne en quelques clics!</p>
                     <ul class="list-unstyled mb-0 mt-4 social-icon">
                         <li class="list-inline-item"><a href="javascript:void(0)"><i class="mdi mdi-facebook"></i></a></li>
@@ -570,7 +572,7 @@
                 <div class="col-lg-12">
                     <div class="text-center">
                         <p class="mb-0 text-white fs-15">©
-                            <script>document.write(new Date().getFullYear())</script> Imprimerie Nationale. Powered by <a href="https://sahanalytics.com/" style="color:orange" target="_blank">SaH Analytics Int.</a>
+                            <script>document.write(new Date().getFullYear())</script> Ministère de la Justice. Powered by <a href="https://sahanalytics.com/" style="color:orange" target="_blank">SaH Analytics Int.</a>
                         </p>
                     </div>
                 </div>

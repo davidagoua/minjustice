@@ -21,6 +21,7 @@ return new class extends Migration
             $table->foreignId('user_id');
             $table->foreignId('type_document_id');
             $table->foreignId('demande_id')->nullable();
+            $table->json('data')->nullable();
             $table->timestamps();
         });
     }

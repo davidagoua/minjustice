@@ -17,6 +17,7 @@ use Illuminate\Auth\Events\Registered;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\HtmlString;
 use Livewire\Component;
 use \Filament\Forms\Components;
 use function PHPUnit\Framework\throwException;
@@ -139,7 +140,8 @@ class ResgisterForm extends Component implements HasForms
                         ]),
 
                     ]),
-                    Components\Wizard\Step::make('Parental')->label('Informations de filiations')->schema([
+                    Components\Wizard\Step::make('Parental')->label('Informations de filiations')
+                        ->schema([
                         Components\Section::make('Père')->schema([
                             Grid::make(['default'=>1, 'md'=>2])->schema([
                                 TextInput::make('last_name_pere')->label('Nom du père')->required()->extraInputAttributes([
@@ -183,7 +185,7 @@ class ResgisterForm extends Component implements HasForms
                             ]),
                         ]),
                     ]),
-                ])
+                ])->submitAction(new HtmlString("<button type='submit' wire:click.prvent='save' class='button h-button btn-primary'>S'inscrire</button>"))
             ])
         ];
     }
