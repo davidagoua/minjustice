@@ -12,6 +12,6 @@ class DocumentController extends Controller
     {
         $url = Storage::disk('s3')->temporaryUrl($document->path, now()->addDays(5));
 
-        return response()->redirect($url);
+        return redirect($url);
     }
 }
