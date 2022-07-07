@@ -10,6 +10,8 @@ class DocumentController extends Controller
 {
     public function download(Document $document)
     {
-        return Storage::disk('s3')->temporaryUrl($document->path, now()->addDays(5));
+        $url = Storage::disk('s3')->temporaryUrl($document->path, now()->addDays(5));
+
+        return response()->file($url);
     }
 }
