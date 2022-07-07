@@ -91,10 +91,15 @@ class DemandeController extends Controller
 
             //filtre par type de document
 
-            $pdf = Pdf::loadView('pdf.certificate', compact('document'));
+            $pdf = Pdf::loadView('pdf.certificate', [
+                'document'=> $document,
+                'registre'=> $request->json('document.number'),
+                'juridiction'=>$request->json('hall.name'),
+                'user'=> $demande->user
+            ]);
             $pdf->save($document->path);
         }
-        return response()->json("OK", 200);
+        return $pdf->download('certificate.pdf');
     }
 
     public function download_recu(Request $request, Paiement $paiement)
