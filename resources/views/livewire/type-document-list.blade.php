@@ -55,6 +55,8 @@
                                                     <div class="flex-end">
                                                         @if($type->url !== "")
                                                         <a class="button h-button is-primary is-raised" href="{{ route($type->url) }}">Choisir</a>
+                                                        @else
+                                                            <a class="button h-button is-primary is-raised" href="{{ route('demande.create', ['document'=>$type]) }}">Choisir</a>
                                                         @endif
                                                     </div>
                                                 </div>

@@ -185,7 +185,7 @@ class ResgisterForm extends Component implements HasForms
                             ]),
                         ]),
                     ]),
-                ])->submitAction(new HtmlString("<button wire:click.prevent='save'  class='button h-button btn-primary'>S'inscrire</button>"))
+                ])->submitAction(new HtmlString("<button type='submit' class='button h-button btn-primary'>S'inscrire</button>"))
             ])
         ];
     }
