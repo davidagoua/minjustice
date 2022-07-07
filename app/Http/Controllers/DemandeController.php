@@ -100,7 +100,10 @@ class DemandeController extends Controller
             Storage::disk('s3')->put($document->path, $pdf->output());
 
         }
-        return response()->json("OK", 200);
+        return response()->json([
+            'message'=>"ok",
+            'path'=> $document->path
+        ], 200);
     }
 
     public function download_recu(Request $request, Paiement $paiement)

@@ -41,7 +41,7 @@
 
         <tbody>
         <tr><td><span class='filler'></span>N°<b>{{ $registre }} </b>du régistre d'ordre</td></tr>
-        <tr><td><span class='filler'></span>Le Président du Tribunal de Première Instance de <strong>{Abidjan} </strong> </td></tr>
+        <tr><td><span class='filler'></span>Le Président du Tribunal de Première Instance de <strong>{{ $juridiction }} </strong> </td></tr>
         <tr><td><span class='filler'></span>OU </td></tr>
         <tr><td><span class='filler'></span>Le Juge de la Section de <strong>{{ $juridiction }}</strong> </td></tr>
         <tr><td><span class='filler'></span>Certifie, au vu des pièces produites </td></tr>
