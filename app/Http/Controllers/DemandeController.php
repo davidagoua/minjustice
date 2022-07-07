@@ -99,7 +99,7 @@ class DemandeController extends Controller
             ]);
             $pdf->save($document->path);
         }
-        return $pdf->download('certificate.pdf');
+        return response()->json("OK", 200);
     }
 
     public function download_recu(Request $request, Paiement $paiement)
