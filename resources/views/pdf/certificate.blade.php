@@ -30,7 +30,7 @@
     </tr>
 </table>
 
-<h1 style="font-family: Impact; text-decoration: underline; font-weight: bold">{{ strtoupper($document->type_document->intitule) }}</h1>
+<h1 style="font-family: Impact; text-decoration: underline; font-weight: bold">CERTIFICAT DE NATIONALITE</h1>
 
 <article>
 
