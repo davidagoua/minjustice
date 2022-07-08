@@ -34,6 +34,11 @@ class CreateDemandeForm extends Component implements HasForms
     public $isPaided = false;
     public $paiement;
 
+    public $listeners = [
+        'accepted'=>'save',
+        'failed'=>'failed'
+    ];
+
 
     public function mount()
     {
@@ -44,6 +49,11 @@ class CreateDemandeForm extends Component implements HasForms
     public function getFormModel() : string
     {
         return Demande::class;
+    }
+
+    public function failed()
+    {
+        
     }
 
     public function save()
