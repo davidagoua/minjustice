@@ -95,7 +95,7 @@
                                                 </div>
                                             </div>
                                             <div class="flex-table-cell cell-center " data-th="Count">
-                                                <span class="light-text">0</span>
+                                                <span class="light-text">{{ auth()->user()->documents()->count() }}</span>
                                             </div>
 
                                             <div class="flex-table-cell cell-end" data-th="Actions">
