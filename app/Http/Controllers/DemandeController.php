@@ -61,7 +61,7 @@ class DemandeController extends Controller
             $demande->setStatus(DemandeStatus::TRAITEMENT);
             //$demande->user->notify(new DemandeValide($demande));
 
-            SendSMS::run($demande->user->contact, "Bonjour chère {$demande->user->fullName}, Votre demande de document [{$this->demande->type_document->intitule}]
+            SendSMS::run($demande->user->contact, "Bonjour chère {$demande->user->fullName}, Votre demande de document [{$demande->type_document->intitule}]
 a été validé.
 Le document est à présent en cour de traiement
           ");
@@ -70,7 +70,7 @@ Le document est à présent en cour de traiement
             $demande->setStatus(DemandeStatus::TERMINE);
             try{
                 //$demande->user->notify(new DemandeTerminee($demande));
-                SendSMS::run($demande->user->contact, "Bonjour chère {$demande->user->fullName}, Votre demande de document [{$this->demande->type_document->intitule}]
+                SendSMS::run($demande->user->contact, "Bonjour chère {$demande->user->fullName}, Votre demande de document [{$demande->type_document->intitule}]
            est terminé.
            Vous pouvez télécharger le document ou le retrouver dans votre juridiction
           ");
