@@ -17,7 +17,7 @@
         <td style="text-align: center">
             <p style="font-variant-caps: all-small-caps">Ministere de la Justice </p>
             <p>--------------</p>
-            <p style="font-size: smaller;font-variant-caps: all-small-caps">TRIBUNAL DE PREMIERE INSTANCE</p>
+            <p style="font-size: smaller;font-variant-caps: all-small-caps">{{ $juridiction }}</p>
             <p><img style="width: 100px;" src="{{ public_path('/pdf/justice.png') }}"></p>
         </td>
         <td></td>
@@ -46,7 +46,7 @@
         <tr><td><span class='filler'></span>OU </td></tr>
         <tr><td><span class='filler'></span>Le Juge de la Section de <strong>{{ $juridiction }}</strong> </td></tr>
         <tr><td><span class='filler'></span>Certifie, au vu des pièces produites </td></tr>
-        <tr><td><span class='filler'></span>que <strong>{Monsieur} {{ $user->fullName }}</strong> </strong>  </td></tr>
+        <tr><td><span class='filler'></span>que <strong>{{ $user->fullName }}</strong> </strong>  </td></tr>
         <tr><td><span class='filler'></span>demeurant à <strong>{{ $user->quartier }}</strong>  </td></tr>
         <tr><td><span class='filler'></span>né(e) à <strong>{{ $user->lieu_naissance }}</strong>  le <strong>{{ $user->date_naissance }}</strong> </td></tr>
         <tr><td><span class='filler'></span>de <strong>{{ $user->last_name_pere.' '.$user->first_name_pere }}  né(e) à <strong>{{ $user->lieu_naissance_pere }} </strong>le <strong>{{ $user->date_naissance_pere }}</strong> </td></tr>
