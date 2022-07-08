@@ -41,7 +41,7 @@
         <tbody>
         <tr><td><span class='recus'></span>NUMERO TRANSACTION : <b>{{ $paiement->reference }} </b></td></tr>
         <tr><td><span class='recus'></span>MONTANT :  <strong> {{ $type_document->montant }} FCFA </strong></td></tr>
-        <tr><td><span class='recus'></span>TYPE DE DEMANDE : ETABLISSEMENT D'UN CERTIFICAT DE NATIONALITE</td></tr>
+        <tr><td><span class='recus'></span>TYPE DE DEMANDE : ETABLISSEMENT D'UN {{ strtoupper($type_document->intitule) ?? 'CERTIFICAT DE NATIONALITE' }}</td></tr>
         <tr><td><span class='recus'></span>DEMANDEUR :<strong>{{ ucfirst(auth()->user()->fullName)  }}</strong> </td></tr>
         <tr><td><span class='recus'></span>DATE NAISSANCE :<strong></strong> {{ auth()->user()->date_naissance }} </td></tr>
         <tr><td><span class='recus'></span>LIEU DE NAISSANCE :<strong>{{ auth()->user()->date_naissance }} </strong></td></tr>

@@ -141,7 +141,7 @@
                                     <!--List Item-->
                                     @forelse(auth()->user()->demandes as $demande)
                                     <div class="inner-list-item media-flex-center">
-                                        <div class="animated-checkbox is-unchecked">
+                                        <div class="animated-checkbox @if($demande->status === \App\Models\DemandeStatus::TERMINE) is-checked @else is-unchecked @endif">
                                             <input type="checkbox">
                                             <div class="checkmark-wrap">
                                                 <div class="shadow-circle"></div>

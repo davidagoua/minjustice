@@ -32,7 +32,8 @@ class DemandeController extends Controller
 
     public function create(Request $request, TypeDocument $document)
     {
-        return view('demande.create', compact('document'));
+        $transaction_id = Str::random(16);
+        return view('demande.create', compact('document','transaction_id'));
     }
 
     public function valider(Request $request, Demande $demande)
@@ -101,12 +102,23 @@ Le document est à présent en cour de traiement
 
             //filtre par type de document
 
-            $pdf = Pdf::loadView('pdf.certificate', [
-                'document'=> $document,
-                'registre'=> $request->json('document.number'),
-                'juridiction'=>$request->json('hall.name'),
-                'user'=> $demande->user
-            ]);
+            if($document->type->intitule == "Casier Judiciaire"){
+                $pdf = Pdf::loadView('pdf.casier', [
+                    'document'=> $document,
+                    'registre'=> $request->json('document.number'),
+                    'juridiction'=>$request->json('hall.name'),
+                    'user'=> $demande->user
+                ]);
+            }else{
+                $pdf = Pdf::loadView('pdf.certificate', [
+                    'document'=> $document,
+                    'registre'=> $request->json('document.number'),
+                    'juridiction'=>$request->json('hall.name'),
+                    'user'=> $demande->user
+                ]);
+            }
+
+
             Storage::disk('s3')->put($document->path, $pdf->output());
 
         }

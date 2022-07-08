@@ -16,16 +16,17 @@
                     <i class="sidebar-svg" data-feather="home"></i>
                 </a>
             </li> <!-- Layouts -->
-            <li>
-                <a href="{{ route('demande.type') }}" id="layouts-sidebar-menu" title="Demande de document">
-                    <i class="sidebar-svg" data-feather="file-plus"></i>
-                </a>
-            </li> <!-- Bounties -->
+
             <li>
                 <a href="{{ route('documents') }}" id="elements-sidebar-menu" title="Mes documents">
                     <i class="sidebar-svg" data-feather="file-text"></i>
                 </a>
             </li> <!-- Bugs -->
+            <li>
+                <a href="{{ route('demande.type') }}" id="layouts-sidebar-menu" title="Demande de document">
+                    <i class="sidebar-svg" data-feather="file-plus"></i>
+                </a>
+            </li> <!-- Bounties -->
             <li>
                 <a href="{{ route('notification') }}" id="components-sidebar-menu" title="Filiation">
                     <i class="sidebar-svg" data-feather="users"></i>

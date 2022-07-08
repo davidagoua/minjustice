@@ -3,6 +3,7 @@
 namespace App\Http\Livewire;
 
 use App\Actions\MakePayementRequest;
+use App\Actions\SendCasierToValidation;
 use App\Actions\SendToValidation;
 use App\Models\Demande;
 use App\Models\Document;
@@ -15,6 +16,8 @@ use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
 use Filament\Support\Actions\Modal\Actions\Action;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\HtmlString;
 use Illuminate\Support\Str;
 use Livewire\Component;
 
@@ -27,6 +30,10 @@ class CreateDemandeForm extends Component implements HasForms
     public $medium="mobile";
     public $contact_debit="";
     public $document_requis;
+    public $document_requit;
+    public $isPaided = false;
+    public $paiement;
+
 
     public function mount()
     {
@@ -41,23 +48,41 @@ class CreateDemandeForm extends Component implements HasForms
 
     public function save()
     {
+        $this->isPaided = true;
+        $state = $this->form->getState();
         $demande = new Demande();
         $demande->user()->associate(auth()->user());
         $demande->juridiction_id = $this->juridiction;
         $demande->type_document()->associate($this->document);
         $demande->save();
-        $paiement = Paiement::create([
+        $this->paiement = Paiement::create([
             'user_id' => auth()->id(),
             'demande_id' => $demande->id,
             'reference' => Str::random(10),
             'montant' => 100,
             'contact' => $this->contact_debit,
         ]);
-        $response = $paiement->makeRequest();
-        dd($response);
-        SendToValidation::run(auth()->user(), $demande);
+
+        $demande->paiement_id = $this->paiement->id;
+        $demande->save();
+
+        $items = [];
+        $path = auth()->user()->fullName.'-'.$demande->id;
+
+        foreach($state['document_requit'] as $key=>$reqs){
+            $lpath = Storage::disk('s3')->put($path, $reqs['document_requis']);
+            $items[] = [
+                'code'=> $reqs['docnum'],
+                'path'=> $lpath,
+                'issue_at'=> $reqs['date_delivrance'],
+                'type'=> $file->originalName ?? 'document'.$key
+            ];
+        }
+
+        //$response = $this->paiement->makeRequest();
+        SendCasierToValidation::run(auth()->user(), $demande, $items);
         //auth()->user()->notify(new DemandeRegistered($demande));
-        return redirect()->route('dashboard')->with('demande_registered', $this->document->intitule);
+        //return redirect()->route('dashboard')->with('demande_registered', $this->document->intitule);
     }
 
     public function getFormSchema(): array
@@ -70,8 +95,8 @@ class CreateDemandeForm extends Component implements HasForms
                         Components\Placeholder::make('Informations')->content(function($state) use ($document){
                             return view('filaments.demande.information', compact('document'));
                         }),
-                        Components\Repeater::make('document_requis')->schema([
-                            Components\Select::make('Document')->options([
+                        Components\Repeater::make('document_requit')->schema([
+                            Components\Select::make('document')->options([
                                 'Extrait de naissance',
                                 'Certificat de nationalité',
                                 "Attestation d'identité"
@@ -79,9 +104,8 @@ class CreateDemandeForm extends Component implements HasForms
                             Components\TextInput::make('docnum')->label("Numéro du document")->required(),
                             Components\TextInput::make('date_delivrance')->label("Date de délivrance")
                                 ->type('date'),
-                            Components\FileUpload::make('document_requis')
-                                ->acceptedFileTypes(['application/pdf'])
-                                ->helperText("Joindre un document PDF"),
+                            Components\TextInput::make('document_requis')
+                                ->type('file'),
 
                         ])->minItems(count($document->docs))->required( count($document->docs) > 0)
                         ->defaultItems(2)->columns(4),
@@ -91,21 +115,20 @@ class CreateDemandeForm extends Component implements HasForms
                             ->options(Juridiction::all()->pluck('nom', 'id'))
                     ]),
                     Components\Wizard\Step::make('Paiement')->schema([
-                        Components\Radio::make('medium')->label("Moyen de paiement")
-                            ->options([
-                                'visa'=>"Par Carte visa",
-                                'mobile'=>'Par mobile Money'
-                            ])->inline(),
-                        Components\TextInput::make('carte')->hidden(function($get){
-                            return $get('medium') != 'visa';
-                        }),
-                        Components\TextInput::make('contact_debit')->hidden(function($get){
-                            return $get('medium') != 'mobile';
-                        })->label("Contact a débiter")->prefix('+225')
+                        Components\Placeholder::make('cinetpay')->label("Paiement")
+                            ->content(new HtmlString('<div class="text-center"><button type="button" class="button h-button" onclick="checkout()">Proceder au paiement</button></div>'))
                     ]),
                 ])->reactive()
+                //->submitAction(new HtmlString("<button type='submit' wire:click.prevent='save' class='button h-button btn-primary'>S'inscrire</button>"))
             ])
         ];
+    }
+
+    public function download_recu()
+    {
+        return redirect()->route('demande.download_recu',[
+            'paiement'=> $this->paiement
+        ]);
     }
 
     public function render()
