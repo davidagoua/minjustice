@@ -240,6 +240,6 @@ constatant l'existence du décret "
 
     public function render()
     {
-        return view('livewire.create-demande-form');
+        return view('livewire.certificate-form-widget');
     }
 }
