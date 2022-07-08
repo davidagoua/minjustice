@@ -89,6 +89,10 @@ Route::get("/notitest00", function(){
    \App\Actions\SendSMS::run();
 });
 
+Route::get('/testpdf', function(){
+    $pdf = \Barryvdh\DomPDF\Facade\Pdf::loadView('pdf.test');
+    return $pdf->download();
+});
 
 
 
