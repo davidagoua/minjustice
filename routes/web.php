@@ -90,7 +90,7 @@ Route::get("/notitest00", function(){
 });
 
 Route::get('/testpdf', function(){
-    $pdf = \Barryvdh\DomPDF\Facade\Pdf::loadView('pdf.test');
+    $pdf = \Barryvdh\DomPDF\Facade\Pdf::loadView('pdf.test')->setPaper("a4");
     return $pdf->download();
 });
 

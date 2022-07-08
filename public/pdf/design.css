@@ -49,7 +49,9 @@ body {background-image: url("backelephant.png" );background-size: 100%;backgroun
 .recu {background-image: url("fond-recu.jpg" );background-size: auto; background-repeat:repeat;}
 
 footer {
-	margin-top: 100px;
+    position: absolute;
+    bottom: 15px;
+    left: 0;
 	text-align: center;
 	font-family: "Footlight MT Light";
 	font-style:italic;
@@ -63,7 +65,7 @@ footer {
 	position: absolute;
 	width: 15px;
 	height:152%;
-	margin-left: -50px;
+	margin-left: 0;
 	margin-top: -50px;
 	background-color: orange;
 }
@@ -72,7 +74,7 @@ footer {
 	position: absolute;
 	width: 15px;
 	height:152%;
-	margin-left: -20px;
+	margin-left: 25px;
 	margin-top: -50px;
 	float: left;
 	background-color: green;
@@ -80,12 +82,10 @@ footer {
 /* header */
 
 header { margin: 0 0 3em; }
-header:after { clear: both; content: ""; display: table; }
 
-header h1 { background: #000; border-radius: 0.25em; color: #FFF; margin: 0 0 1em; padding: 0.5em 0; }
-header address { float: left; font-size: 75%; font-style: normal; line-height: 1.25; margin: 0 1em 1em 0; align-content: center;text-align: center; }
+header address { font-size: 75%; font-style: normal; line-height: 1.25; margin: 0 1em 1em 0; align-content: center;text-align: center; }
 header address p { margin: 0 0 0.25em; }
-header rep { float: right; font-size: 75%; font-style: normal; line-height: 1.25; margin: 0 1em 1em 0; align-content: center;text-align: center; }
+header rep { font-size: 75%; font-style: normal; line-height: 1.25; margin: 0 1em 1em 0; align-content: center;text-align: center; }
 header rep p { margin: 0 0 0.25em; }
 header span, header img { display: block;}
 header span { margin: 0 0 1em 1em; max-height: 25%; max-width: 60%; position: relative; }
@@ -94,16 +94,14 @@ header input { cursor: pointer; -ms-filter:"progid:DXImageTransform.Microsoft.Al
 
 /* article */
 
-article, article address, table.meta, table.inventory { margin: 0 0 3em; }
-article:after { clear: both; content: ""; display: table; }
+article, article address, table.meta, table.inventory { margin: 0 30px 3em; }
 article h1 { clip: rect(auto, auto, auto, auto); position: absolute; }
 
-article address { float: left; font-size: 125%; font-weight: bold; }
+article address { font-size: 125%; font-weight: bold; }
 
 /* table meta & balance */
 
 table.meta, table.balance { float: right; width: auto; }
-table.meta:after, table.balance:after { clear: both; content: ""; display: table; }
 
 /* table meta */
 
@@ -112,7 +110,6 @@ table.meta td { width: auto; }
 
 /* table items */
 
-table.inventory { clear: both; width: 100%; }
 table.inventory th { font-weight: bold; text-align: center; }
 
 table.inventory td:nth-child(1) { width: auto; }
@@ -122,9 +119,9 @@ table.inventory td:nth-child(4) { text-align: right; width: 12%; }
 table.inventory td:nth-child(5) { text-align: right; width: 12%; }
 table.inventory tr {width: 50%; white-space: nowrap; position: relative; text-align: right;}
 
-.filler { font-family:"Courier New"; position: absolute; left: 0; right: 0; border-bottom: 1px dashed #993300; height: 50%;/* table balance */}
+.filler { font-family:"Courier New"; position: absolute; left: 0; right: 0; height: 50%;/* table balance */}
 
-.recus { font-family:"Courier New";  position: absolute; left: 0; right: 0; border-bottom: 2px double #000000; height: 60%;/* table balance */}
+.recus { font-family:"Courier New";  position: absolute; left: 0; right: 0; height: 60%;/* table balance */}
 
 table.balance th, table.balance td { width: 50%; }
 table.balance td { text-align: right; }

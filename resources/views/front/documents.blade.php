@@ -66,7 +66,7 @@
                                         <span>Type</span>
                                         <span>Date d'expiration</span>
                                         <span>Status</span>
-                                        <span>Juridiction</span>
+                                        <span>Date d'etablissement</span>
                                         <span class="cell-end">Actions</span>
                                     </div>
                                     @forelse(auth()->user()->documents as $document)

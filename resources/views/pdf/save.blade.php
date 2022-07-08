@@ -5,33 +5,32 @@
     <meta charset="utf-8">
     <title>CERTIFICAT DE NATIONALITE</title>
     <link rel="stylesheet" href="{{ public_path('/pdf/design.css') }}">
-    <link rel="license" href="https://www.opensource.org/licenses/mit-license/">
-
+    <script src="{{ public_path('/pdf/script.js') }}"></script>
 </head>
 <div class="orange">	</div>
 <div class="vert">	</div>
 <body>
 
-<table style="margin-top: 10px; margin-bottom: 40px">
-    <tr>
-        <td style="text-align: center">
-            <p style="font-variant-caps: all-small-caps">Ministere de la Justice </p>
-            <p>--------------</p>
-            <p style="font-size: smaller;font-variant-caps: all-small-caps">TRIBUNAL DE PREMIERE INSTANCE</p>
-            <p><img style="width: 100px;" src="{{ public_path('/pdf/justice.png') }}"></p>
-        </td>
-        <td></td>
-        <td style="text-align: center">
-            <p style="font-variant-caps: all-small-caps">République de Côte d'Ivoire</p>
-            <p>--------------</p>
-            <p style="font-size: smaller;font-variant-caps: all-small-caps">Union-Discipline-Travail</p>
-            <p><img style="width: 100px;" src="{{ public_path('/pdf/Armoiries_de_la_Côte_dIvoire_de_1964.png') }}"></p>
-        </td>
-    </tr>
-</table>
+<header>
 
-<h1 style="font-family: Impact; text-decoration: underline; font-weight: bold">{{ strtoupper($document->type_document->intitule) }}</h1>
+    <address >
+        <p style="font-variant-caps: all-small-caps">Ministere de la Justice </p>
+        <p>--------------</p>
+        <p style="font-size: smaller;font-variant-caps: all-small-caps">TRIBUNAL DE PREMIERE INSTANCE</p>
+        <p><img width="150" src="{{ public_path('/pdf/justice.png') }}"></p>
+    </address>
 
+    <rep >
+        <p style="font-variant-caps: all-small-caps">République de Côte d'Ivoire</p>
+        <p>--------------</p>
+        <p style="font-size: smaller;font-variant-caps: all-small-caps">Union-Discipline-Travail</p>
+        <p><img width="150" src="{{ public_path('/pdf/Armoiries_de_la_Côte_dIvoire_de_1964.png') }}"></p>
+    </rep>
+
+</header>
+
+
+<h1 style="text-decoration-line: underline; font-style: unset; font-family: Impact ">{{ strtoupper($document->type_document->intitule) }}</h1>
 <article>
 
 
@@ -59,11 +58,11 @@
 </article>
 
 <div align="center" class="qr_code">
-    <img src="data:image/png;base64, {!! base64_encode(QrCode::format('png')->size(100)->generate($document->id)) !!} " >
+    <img src="data:image/png;base64, {!! base64_encode(QrCode::format('png')->size(100)->generate($document->id)) !!} " style=" position: relative">
 </div>
 
 <footer class="pieds">
-    <p style="font-variant: all-small-caps"> REPUBLIQUE DE COTE D'IVOIRE - ministere de la justice - Juridiction de {{ $juridiction }} - {{ now() }} </p>
+    <p style="background-color: #aaaaaa;width: 900px; margin-left: -50px; font-variant: all-small-caps"> 00000000000000 REPUBLIQUE DE COTE D'IVOIRE - ministere de la justice - Juridiction de Dabou -07072022 </p>
 </footer >
 
 </body>
