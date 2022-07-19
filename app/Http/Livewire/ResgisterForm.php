@@ -3,6 +3,7 @@
 namespace App\Http\Livewire;
 
 use App\Actions\SendToValidation;
+use App\Models\Juridiction;
 use App\Models\User;
 use App\Notifications\UserRegistered;
 use Closure;
@@ -80,32 +81,38 @@ class ResgisterForm extends Component implements HasForms
                 Components\Wizard::make([
                     Components\Wizard\Step::make('Account')->label('Informations de connexion')->schema([
                         TextInput::make('email')->email()
+                            ->prefixIcon('heroicon-o-mail')
                             ->unique(table: User::class)
                             ->label('Adresse mail')->required(),
-                        TextInput::make('password')->password()->label('Mot de passe')->required(),
-                        TextInput::make('password_confirmation')
-                            ->same('password')
-                            ->password()->label('Confirmer le mot de passe')->required(),
+                        Grid::make(['default'=>2])->schema([
+                            TextInput::make('password')->password()->label('Mot de passe')
+                                ->prefixIcon('heroicon-o-lock-closed')
+                                ->required(),
+                            TextInput::make('password_confirmation')
+                                ->prefixIcon('heroicon-o-lock-closed')
+                                ->same('password')
+                                ->password()->label('Confirmer le mot de passe')->required()
+                        ]),
                     ]),
                     Components\Wizard\Step::make('Personnel')->label('Informations personnelles')->schema([
                         Grid::make(['default'=>1, 'md'=>2])->schema([
                             TextInput::make('last_name')->label('Nom')->extraInputAttributes([
                                 'onKeyUp'=>"this.value = this.value.toUpperCase();"
-                            ])->required(),
+                            ])->prefixIcon('heroicon-o-user')->required(),
                             TextInput::make('first_name')->extraInputAttributes([
                                 'onKeyUp'=>"this.value = this.value.toUpperCase();"
-                            ])->label('Prénoms')->required(),
+                            ])->label('Prénoms')->required()->prefixIcon('heroicon-o-user'),
                         ]),
 
                         Grid::make(['default'=>1, 'md'=>2])->schema([
                             Components\TextInput::make('date_naissance')->validationAttribute("votre date de naissance")
                                 ->type('date')
                                 ->before(now())
-                                ->label('Date de naissance')->required(),
+                                ->label('Date de naissance')->required()->prefixIcon('heroicon-o-calendar'),
                             TextInput::make('lieu_naissance')
                                 ->label('Lieu de naissance')->extraInputAttributes([
                                     'onKeyUp'=>"this.value = this.value.toUpperCase();"
-                                ])->required(),
+                                ])->required()->prefixIcon('heroicon-o-map'),
                         ]),
 
                         Grid::make(['default'=>1, 'md'=>2])->schema([
@@ -118,7 +125,7 @@ class ResgisterForm extends Component implements HasForms
                                 ->label('Situation matrimoniale')
                                 ->required(),
                             TextInput::make('contact')->label("Numéro de téléphone")
-                                ->tel()->prefix('+225')->required()->numeric()
+                                ->tel()->prefix('+225')->required()
                                 ->length(10)
                         ]),
 
@@ -131,57 +138,57 @@ class ResgisterForm extends Component implements HasForms
                             ->label('Genre')->required(),
 
                         Grid::make(['default'=>1, 'md'=>2])->schema([
-                            Select::make('villeId')->label("Ville")
-                                ->helperText("Ou habitez-vous")
-                                ->options($this->villes)->required(),
-                            TextInput::make('quartier')->label('Commune')->required()->extraInputAttributes([
+                            Select::make('villeId')->label("Juridiction de naissance")
+                                ->options(Juridiction::all()->pluck('nom', 'id'))
+                                ->prefixIcon('heroicon-o-map')->required(),
+                            TextInput::make('quartier')->label("Lieu d'habitation")->required()->extraInputAttributes([
                                 'onKeyUp'=>"this.value = this.value.toUpperCase();"
-                            ])
+                            ])->placeholder('Abidjan,Cocody,Danga')->prefixIcon('heroicon-o-home'),
                         ]),
 
                     ]),
                     Components\Wizard\Step::make('Parental')->label('Informations de filiations')
                         ->schema([
-                        Components\Section::make('Père')->schema([
+                            Components\Section::make('Père')->schema([
                             Grid::make(['default'=>1, 'md'=>2])->schema([
-                                TextInput::make('last_name_pere')->label('Nom du père')->required()->extraInputAttributes([
+                                TextInput::make('last_name_pere')->label('Nom du père')->extraInputAttributes([
                                     'onKeyUp'=>"this.value = this.value.toUpperCase();"
-                                ]),
-                                TextInput::make('first_name_pere')->label('Prénoms du père')->required()->extraInputAttributes([
+                                ])->prefixIcon('heroicon-o-user'),
+                                TextInput::make('first_name_pere')->label('Prénoms du père')->extraInputAttributes([
                                     'onKeyUp'=>"this.value = this.value.toUpperCase();"
-                                ]),
+                                ])->prefixIcon('heroicon-o-user'),
                             ]),
                             Grid::make(['default'=>1, 'md'=>2])->schema([
                                 Components\TextInput::make('date_naissance_pere')
                                     ->type('date')
-                                    ->before(now())
+                                    ->before(now())->prefixIcon('heroicon-o-calendar')
                                     ->before('date_naissance')
-                                    ->label('Date de naissance du père')->required(),
+                                    ->label('Date de naissance du père'),
                                 TextInput::make('lieu_naissance_pere')
-                                    ->label('Lieu de naissance du père')->required()->extraInputAttributes([
+                                    ->label('Lieu de naissance du père')->extraInputAttributes([
                                         'onKeyUp'=>"this.value = this.value.toUpperCase();"
-                                    ]),
+                                    ])->prefixIcon('heroicon-o-map'),
                             ]),
                         ]),
                         Components\Section::make('Mère')->schema([
                             Grid::make(['default'=>1, 'md'=>2])->schema([
-                                TextInput::make('last_name_mere')->label('Nom de la mère')->required()->extraInputAttributes([
+                                TextInput::make('last_name_mere')->label('Nom de la mère')->extraInputAttributes([
                                     'onKeyUp'=>"this.value = this.value.toUpperCase();"
-                                ]),
-                                TextInput::make('first_name_mere')->label('Prénoms de la mère')->required()->extraInputAttributes([
+                                ])->prefixIcon('heroicon-o-user'),
+                                TextInput::make('first_name_mere')->label('Prénoms de la mère')->extraInputAttributes([
                                     'onKeyUp'=>"this.value = this.value.toUpperCase();"
-                                ]),
+                                ])->prefixIcon('heroicon-o-user'),
                             ]),
                             Grid::make(['default'=>1, 'md'=>2])->schema([
                                 Components\TextInput::make('date_naissance_mere')
                                     ->type('date')
-                                    ->before(now())
+                                    ->before(now())->prefixIcon('heroicon-o-calendar')
                                     ->before('date_naissance')
-                                    ->label('Date de naissance de la mère')->required(),
+                                    ->label('Date de naissance de la mère'),
                                 TextInput::make('lieu_naissance_mere')
-                                    ->label('Lieu de naissance de la mère')->required()->extraInputAttributes([
+                                    ->label('Lieu de naissance de la mère')->extraInputAttributes([
                                         'onKeyUp'=>"this.value = this.value.toUpperCase();"
-                                    ]),
+                                    ])->prefixIcon('heroicon-o-map'),
                             ]),
                         ]),
                     ]),

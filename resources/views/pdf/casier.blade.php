@@ -10,7 +10,7 @@
 </head>
 <div class="orange">	</div>
 <div class="vert">	</div>
-<body>
+<body style="background-color: #f0f0f0">
 
 <table style="margin-top: 10px; margin-bottom: 40px">
     <tr>
@@ -35,15 +35,10 @@
 
 <article>
 
-
-
-
-
     <table class="inventory">
 
         <tbody>
         <tr><td><span class='filler'></span>N°<b>{{ $registre }} </b>du régistre d'ordre</td></tr>
-
         <tr><td><span class='filler'></span>Le Nommé <strong>{{ $user->fullName }}</strong> </strong>  </td></tr>
         <tr><td><span class='filler'></span>de <strong>{{ $user->last_name_pere.' '.$user->first_name_pere }}  né(e) à <strong>{{ $user->lieu_naissance_pere }} </strong>le <strong>{{ $user->date_naissance_pere }}</strong> </td></tr>
         <tr><td><span class='filler'></span>et de <strong>{{ $user->last_name_mere.' '.$user->first_name_mere }}  né(e) à <strong>{{ $user->lieu_naissance_mere }} le <strong>{{ $user->date_naissance_mere }}</strong> </td></tr>
@@ -65,7 +60,6 @@
 </tr>
 </thead>
         <tbody>
-
         <td>nenant</td>
         <td>nenant</td>
         <td>nenant</td>

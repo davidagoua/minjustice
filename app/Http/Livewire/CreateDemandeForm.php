@@ -124,6 +124,12 @@ class CreateDemandeForm extends Component implements HasForms
                             ->label("Juridiction")
                             ->options(Juridiction::all()->pluck('nom', 'id'))
                     ]),
+                    Components\Wizard\Step::make('recap')->schema([
+                        Components\Placeholder::make('Demande de Certificat de nationalité')->content(view('form.recap_casier', [
+                            'document' => $document,
+                            'user'=> auth()->user(),
+                        ]))
+                    ]),
                     Components\Wizard\Step::make('Paiement')->schema([
                         Components\Placeholder::make('cinetpay')->label("Paiement")
                             ->content(new HtmlString('<div class="text-center"><button type="button" class="button h-button" onclick="checkout()">Proceder au paiement</button></div>'))

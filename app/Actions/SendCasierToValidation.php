@@ -73,7 +73,7 @@ class SendCasierToValidation
                     ],
                 ],
                 'certificates'=>$this->path,
-                "hall"=>  1,
+                "hall"=>  auth()->user()->ville,
                 'request'=> $this->demande->id,
             ]);
         if($res->status() == 200){

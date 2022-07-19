@@ -33,7 +33,7 @@ class CertificateFormWidget extends Component implements HasForms
     public $medium="mobile";
     public $contact_debit="";
     public $selected_typeCertificate = 0;
-    public $paiement;
+    public $paiement, $recap_certficat;
     public $document_requis = [
         [
             "Extrait d'acte de naissance",
@@ -105,12 +105,18 @@ constatant l'existence du décret "
     public $required = [];
     public $files = [];
     public $dates = [];
+    public $rules = [];
 
     public $listeners = [
         'accepted'=>'save',
         'failed'=>'failed'
     ];
 
+
+    public function rules() : array
+    {
+        return [];
+    }
 
 
     public function __construct($id = null)
@@ -152,13 +158,15 @@ constatant l'existence du décret "
         //upload files
         foreach ($state['files'] as $key => $file){
             $lpath = Storage::disk('s3')->put($path, $file);
+
             $required_fields[] = [
               'code'=> $state['numerodocs'][$key],
               'path'=> $lpath,
               'issue_at'=> $state['dates'][$key],
-                'type'=> $file->originalName ?? 'document'.$key
+                'type'=> $this->document_requis[$this->selected_typeCertificate][$key] ?? '',
             ];
         }
+
 
         $this->paiement = Paiement::create([
             'user_id' => auth()->id(),
@@ -189,7 +197,7 @@ constatant l'existence du décret "
         foreach ($requireds as $key => $field){
 
             $items[] = Components\Grid::make(['default'=>'4'])->schema([
-               Components\Placeholder::make('namesss'.$key)->content($field)
+               Components\Placeholder::make('namesss.'.$key)->content($field)
                    ->label("Document"),
                 Components\Hidden::make('required.'.$key)->extraAttributes(['value'=>$field]),
                 Components\TextInput::make('numerodocs.'.$key)->label("Numero du document"),
@@ -220,18 +228,27 @@ constatant l'existence du décret "
 
                         $this->getDocsSection()->reactive(),
 
+                        /*
                         Components\Select::make('juridiction')
                             ->label("Juridiction")
                             ->options(Juridiction::all()->pluck('nom', 'id'))
-                    ]),
 
+                        */
+                    ])->reactive(),
+
+                    Components\Wizard\Step::make('recap')->schema([
+                        Components\Placeholder::make('recap')->content(function($state){
+                            return view('form.recap_certificate');
+                        })->reactive(),
+
+                    ]),
 
                     Components\Wizard\Step::make('Paiement')->schema([
                         Components\Placeholder::make('cinetpay')->label("Paiement")
                             ->content(new HtmlString('<div class="text-center"><button type="button" class="button h-button" onclick="checkout()">Proceder au paiement</button></div>'))
                     ]),
-                ])->reactive()
-                    //->submitAction(new HtmlString("<button type='submit' wire:click.prevent='save' class='button h-button btn-primary'>S'inscrire</button>"))
+                ])
+                    ->submitAction(new HtmlString("<button type='submit' wire:click.prevent='save' class='button h-button btn-primary'>S'inscrire</button>"))
             ])
         ];
     }
