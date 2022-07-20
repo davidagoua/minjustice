@@ -54,11 +54,7 @@
                             <div class="column is-12">
                                 <div class="feed-settings">
                                     <h3 class="dark-inverted">Documents traités ce mois-ci</h3>
-                                    <div class="buttons">
-                                        <button class="button is-dark-outlined">Tout</button>
-                                        <button class="button is-selected is-dark-outlined">Personnel</button>
-                                        <button class="button is-dark-outlined">Filiation</button>
-                                    </div>
+
                                 </div>
                             </div>
 
@@ -99,7 +95,7 @@
                                             </div>
 
                                             <div class="flex-table-cell cell-end" data-th="Actions">
-                                                <a class="action-link is-pushed-mobile">Consulter</a>
+                                                <a href="{{ route('documents') }}" class="action-link is-pushed-mobile">Consulter</a>
                                             </div>
                                         </div>
                                     </div>

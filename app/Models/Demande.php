@@ -11,6 +11,7 @@ class DemandeStatus {
     public  const TRAITEMENT = 2;
     public  const ECHEC = 3;
     public  const TERMINE = 4;
+    public const REJETE = 5;
 }
 
 

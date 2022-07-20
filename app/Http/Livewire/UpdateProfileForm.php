@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\Juridiction;
 use App\Models\User;
 use Closure;
 use Filament\Forms\Components\Grid;
@@ -101,57 +102,57 @@ class UpdateProfileForm extends Component implements HasForms
                         ->label('Genre')->required(),
 
                     Grid::make(['default'=>1, 'md'=>2])->schema([
-                        Select::make('villeId')->label("Ville")
-                            ->helperText("Ou habitez-vous")
-                            ->options($this->villes)->required(),
-                        TextInput::make('quartier')->label('Quartier')->required()->extraInputAttributes([
+                        Select::make('villeId')->label("Juridiction de naissance")
+                            ->default($this->user->villeId ?? "Abidjan")
+
+                            ->options(Juridiction::all()->pluck('nom','id')->toArray())->required(),
+
+                        TextInput::make('quartier')->label('Adresse')->required()->extraInputAttributes([
                             'onKeyUp'=>"this.value = this.value.toUpperCase();"
                         ])
                     ]),
 
                 ]),
-            Components\Card::make()->schema([
-                    Components\Section::make('Père')->schema([
-                        Grid::make(['default'=>1, 'md'=>2])->schema([
-                            TextInput::make('last_name_pere')->label('Nom du père')->required()->extraInputAttributes([
-                                'onKeyUp'=>"this.value = this.value.toUpperCase();"
-                            ]),
-                            TextInput::make('first_name_pere')->label('Prénoms du père')->required()->extraInputAttributes([
-                                'onKeyUp'=>"this.value = this.value.toUpperCase();"
-                            ]),
-                        ])->disabled(),
-                        Grid::make(['default'=>1, 'md'=>2])->schema([
-                            TextInput::make('date_naissance_pere')->type('date')
-                                ->before(now())
-                                ->before('date_naissance')
-                                ->label('Date de naissance du père')->required(),
-                            TextInput::make('lieu_naissance_pere')
-                                ->label('Lieu de naissance du père')->required()->extraInputAttributes([
-                                    'onKeyUp'=>"this.value = this.value.toUpperCase();"
-                                ]),
+            Components\Section::make('Père')->schema([
+                Grid::make(['default'=>1, 'md'=>2])->schema([
+                    TextInput::make('last_name_pere')->label('Nom du père')->required()->extraInputAttributes([
+                        'onKeyUp'=>"this.value = this.value.toUpperCase();"
+                    ]),
+                    TextInput::make('first_name_pere')->label('Prénoms du père')->required()->extraInputAttributes([
+                        'onKeyUp'=>"this.value = this.value.toUpperCase();"
+                    ]),
+                ])->disabled(),
+                Grid::make(['default'=>1, 'md'=>2])->schema([
+                    TextInput::make('date_naissance_pere')->type('date')
+                        ->before(now())
+                        ->before('date_naissance')
+                        ->label('Date de naissance du père')->required(),
+                    TextInput::make('lieu_naissance_pere')
+                        ->label('Lieu de naissance du père')->required()->extraInputAttributes([
+                            'onKeyUp'=>"this.value = this.value.toUpperCase();"
                         ]),
-                    ])->disabled(),
-                    Components\Section::make('Mère')->schema([
-                        Grid::make(['default'=>1, 'md'=>2])->schema([
-                            TextInput::make('last_name_mere')->label('Nom de la mère')->required()->extraInputAttributes([
-                                'onKeyUp'=>"this.value = this.value.toUpperCase();"
-                            ]),
-                            TextInput::make('first_name_mere')->label('Prénoms de la mère')->required()->extraInputAttributes([
-                                'onKeyUp'=>"this.value = this.value.toUpperCase();"
-                            ]),
-                        ]),
-                        Grid::make(['default'=>1, 'md'=>2])->schema([
-                            TextInput::make('date_naissance_mere')->type('date')
-                                ->before(now())
-                                ->before('date_naissance')
-                                ->label('Date de naissance de la mère')->required(),
-                            TextInput::make('lieu_naissance_mere')
-                                ->label('Lieu de naissance de la mère')->required()->extraInputAttributes([
-                                    'onKeyUp'=>"this.value = this.value.toUpperCase();"
-                                ]),
-                        ]),
-                    ])->disabled(),
                 ]),
+            ]),
+            Components\Section::make('Mère')->schema([
+                Grid::make(['default'=>1, 'md'=>2])->schema([
+                    TextInput::make('last_name_mere')->label('Nom de la mère')->required()->extraInputAttributes([
+                        'onKeyUp'=>"this.value = this.value.toUpperCase();"
+                    ]),
+                    TextInput::make('first_name_mere')->label('Prénoms de la mère')->required()->extraInputAttributes([
+                        'onKeyUp'=>"this.value = this.value.toUpperCase();"
+                    ]),
+                ]),
+                Grid::make(['default'=>1, 'md'=>2])->schema([
+                    TextInput::make('date_naissance_mere')->type('date')
+                        ->before(now())
+                        ->before('date_naissance')
+                        ->label('Date de naissance de la mère')->required(),
+                    TextInput::make('lieu_naissance_mere')
+                        ->label('Lieu de naissance de la mère')->required()->extraInputAttributes([
+                            'onKeyUp'=>"this.value = this.value.toUpperCase();"
+                        ]),
+                ]),
+            ])
 
         ];
     }

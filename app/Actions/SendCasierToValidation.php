@@ -51,25 +51,25 @@ class SendCasierToValidation
                 'data'=> [
                     'person'=>[
                         'address'=> $this->user->ville .', '.$this->user->quartier,
-                        'birth_place'=> $this->user->lieu_naissance,
-                        'birth_at'=> $this->user->date_naissance,
-                        'civil_status'=> $this->user->situation_matrimonial,
+                        'birth_place'=> $this->user->lieu_naissance ?? "",
+                        'birth_at'=> $this->user->date_naissance ?? "",
+                        'civil_status'=> $this->user->situation_matrimonial ?? "",
                         'profession'=> null,
                         'nationality'=> 'IVOIRIENNE',
-                        'firstname'=> $this->user->first_name,
-                        'lastname'=>$this->user->last_name,
+                        'firstname'=> $this->user->first_name ?? "",
+                        'lastname'=>$this->user->last_name ?? "",
                     ],
                     'father'=>[
-                        'firstname'=>$this->user->first_name_pere,
-                        'lastname'=>$this->user->last_name_pere,
-                        'birth_at'=>$this->user->date_naissance_pere,
-                        'birth_place'=> $this->user->lieu_naissance_pere
+                        'firstname'=>$this->user->first_name_pere ?? "",
+                        'lastname'=>$this->user->last_name_pere ?? "",
+                        'birth_at'=>$this->user->date_naissance_pere ?? "",
+                        'birth_place'=> $this->user->lieu_naissance_pere ?? ""
                     ],
                     'mother'=>[
-                        'firstname'=>$this->user->first_name_mere,
-                        'lastname'=>$this->user->last_name_mere,
-                        'birth_at'=>$this->user->date_naissance_mere,
-                        'birth_place'=> $this->user->lieu_naissance_mere
+                        'firstname'=>$this->user->first_name_mere ?? "",
+                        'lastname'=>$this->user->last_name_mere ?? "",
+                        'birth_at'=>$this->user->date_naissance_mere ?? "",
+                        'birth_place'=> $this->user->lieu_naissance_mere ?? ""
                     ],
                 ],
                 'certificates'=>$this->path,

@@ -1,9 +1,7 @@
 <div>
 
     <div class="row ">
-        <div class="w-4/12">
-            <div class="border border-2 h-5 w-full"></div>
-        </div>
+
         <div class="w-8/12 p-4 border-2 border-blue-200">
             <table class="table w-full table-borderless">
                 <tr>
@@ -28,7 +26,14 @@
                 </tr>
                 <tr>
                     <th style="border-width: 0px">Documents requis</th>
-                    <td style="border-width: 0px"></td>
+                    <td style="border-width: 0px">
+                        <ul>
+
+                        @foreach($requireds as $req)
+                        <li>{{ $req }}</li>
+                        @endforeach
+                        </ul>
+                    </td>
                 </tr>
                 <tr>
                     <th style="border-width: 0px">Juridiction</th>

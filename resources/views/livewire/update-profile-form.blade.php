@@ -1,7 +1,6 @@
 <div>
-    <form class="" style="margin: 10px 0px">
+    <form class="" style="margin: 10px 0px" id="update_form"  wire:submit="save">
         {{ $this->form }}
 
-        <button id="save-button" wire:click.prevent="save" type="submit" class="button h-button is-primary is-raised">Modifier</button>
     </form>
 </div>

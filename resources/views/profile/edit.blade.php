@@ -29,13 +29,7 @@
                                                   <i aria-hidden="true" class="fas fa-arrow-right"></i>
                                               </span>
                                 </a>
-                                <a href="{{ route('profile.edit', ['profile'=>$user]) }}?step=2" class="account-menu-item">
-                                    <i class="lnil lnil-crown-alt"></i>
-                                    <span>Informations filiations</span>
-                                    <span class="end">
-                                                  <i aria-hidden="true" class="fas fa-arrow-right"></i>
-                                              </span>
-                                </a>
+
 
                             </div>
                         </div>
@@ -48,17 +42,10 @@
                                 <div class="form-head-inner">
                                     <div class="left">
                                         <h3>Modifier mon profile</h3>
-                                        <p>Edit your account's general information</p>
                                     </div>
                                     <div class="right">
                                         <div class="buttons">
-                                            <a href="{{ route('profile.index') }}" class="button h-button is-light is-dark-outlined">
-                                                            <span class="icon">
-                                                              <i class="lnir lnir-arrow-left rem-100"></i>
-                                                          </span>
-                                                <span>Go Back</span>
-                                            </a>
-                                            <button id="save-button" class="button h-button is-primary is-raised">Save Changes</button>
+                                            <button id="save-button" class="button h-button is-primary is-raised" onclick="$('#update_form').submit()">Enregistrer les modification</button>
                                         </div>
                                     </div>
                                 </div>

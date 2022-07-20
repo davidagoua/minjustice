@@ -22,12 +22,14 @@ class DemandeController extends Controller
     public function liste_type_demande()
     {
         $type_demandes = TypeDemande::all();
-        return view('demande.liste_type', compact('type_demandes'));
+        $page_title = 'Liste des types de demandes';
+        return view('demande.liste_type', compact('type_demandes','page_title'));
     }
 
     public function liste_type_documents(Request $request, TypeDemande $typeDemande)
     {
-        return view('demande.liste_document', compact('typeDemande'));
+        $page_title = 'Liste des types de documents';
+        return view('demande.liste_document', compact('typeDemande','page_title'));
     }
 
     public function create(Request $request, TypeDocument $document)

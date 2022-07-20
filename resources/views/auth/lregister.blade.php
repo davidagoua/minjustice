@@ -32,21 +32,7 @@
     <div class="pageloader is-full"></div>
     <div class="infraloader is-full is-active"></div>
     <!--Mobile navbar-->
-    <nav class="navbar mobile-navbar no-shadow is-hidden-desktop is-hidden-tablet" aria-label="main navigation">
-        <div class="container">
-            <!-- Brand -->
-            <div class="navbar-brand">
-                <!-- Mobile menu toggler icon -->
 
-                <a class="navbar-item is-brand" href="index.html">
-                    <img class="light-image" src="assets/img/logos/logo/logo.svg" alt="">
-                    <img class="dark-image" src="assets/img/logos/logo/logo-light.svg" alt="">
-                </a>
-
-
-            </div>
-        </div>
-    </nav>
 
 
 

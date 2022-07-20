@@ -1,6 +1,6 @@
 <div class="main-sidebar">
     <div class="sidebar-brand">
-        <a href="../dist/">
+        <a href="{{ route('dashboard') }}">
             <img class="light-image" src="/images/logo.png" alt="">
             <img class="dark-image" src="/images/logo.png" alt="">
         </a>

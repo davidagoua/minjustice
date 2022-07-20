@@ -13,6 +13,11 @@ class NotificationWidget extends Component
         $this->notifications = auth()->user()->unreadNotifications;
     }
 
+    public function markAsRead()
+    {
+        auth()->user()->unreadNotifications->markAsRead();
+    }
+
     public function render()
     {
 

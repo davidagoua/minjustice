@@ -105,7 +105,7 @@ constatant l'existence du décret "
     public $required = [];
     public $files = [];
     public $dates = [];
-    public $rules = [];
+    protected array $rules = [];
 
     public $listeners = [
         'accepted'=>'save',
@@ -190,6 +190,12 @@ constatant l'existence du décret "
         ]);
     }
 
+    public static function getRequiredDocOption($label)
+    {
+
+
+    }
+
     public function getDocsSection() : Components\Section
     {
         $requireds = $this->document_requis[$this->selected_typeCertificate];
@@ -200,14 +206,13 @@ constatant l'existence du décret "
                Components\Placeholder::make('namesss.'.$key)->content($field)
                    ->label("Document"),
                 Components\Hidden::make('required.'.$key)->extraAttributes(['value'=>$field]),
-                Components\TextInput::make('numerodocs.'.$key)->label("Numero du document"),
-                Components\TextInput::make('dates.'.$key)->label("Date de délivrance")->type('date'),
-                Components\TextInput::make('files.'.$key)->label("Fichier")->type('file')
+                Components\TextInput::make('numerodocs.'.$key)->label("Numero du document")->required(),
+                Components\TextInput::make('dates.'.$key)->label("Date de délivrance")->type('date')->required(),
+                Components\TextInput::make('files.'.$key)->label("Fichier")->type('file')->required()
 
             ]);
         }
         return Components\Section::make("Documents requis: ". self::typeCertificate[$this->selected_typeCertificate])
-
             ->schema($items);
     }
 
@@ -236,19 +241,21 @@ constatant l'existence du décret "
                         */
                     ])->reactive(),
 
-                    Components\Wizard\Step::make('recap')->schema([
-                        Components\Placeholder::make('recap')->content(function($state){
-                            return view('form.recap_certificate');
-                        })->reactive(),
-
-                    ]),
 
                     Components\Wizard\Step::make('Paiement')->schema([
+                        Components\Placeholder::make('Recapitulatif')->content(function($state) use ($document, $selected_typeCertificate){
+                            return view('form.recap_certificate', [
+                                'type_naturalisation'=> self::typeCertificate[$selected_typeCertificate],
+                                'user'=> auth()->user(),
+                                'document'=> $document,
+                                'requireds'=> $this->document_requis[$this->selected_typeCertificate]
+                            ]);
+                        }),
                         Components\Placeholder::make('cinetpay')->label("Paiement")
                             ->content(new HtmlString('<div class="text-center"><button type="button" class="button h-button" onclick="checkout()">Proceder au paiement</button></div>'))
                     ]),
                 ])
-                    ->submitAction(new HtmlString("<button type='submit' wire:click.prevent='save' class='button h-button btn-primary'>S'inscrire</button>"))
+                    //->submitAction(new HtmlString("<button type='submit' wire:click.prevent='save' class='button h-button btn-primary'>S'inscrire</button>"))
             ])
         ];
     }

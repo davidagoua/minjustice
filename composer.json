@@ -7,7 +7,7 @@
     "require": {
         "php": "^8.0.2",
         "barryvdh/laravel-dompdf": "^1.0",
-        "filament/filament": "^2.13",
+        "filament/filament": "^v2.14.4",
         "guzzlehttp/guzzle": "^7.2",
         "laravel-lang/lang": "^10.9",
         "laravel/breeze": "^1.9",

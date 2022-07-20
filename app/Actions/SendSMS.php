@@ -16,6 +16,7 @@ class SendSMS
 
     public function handle($contact='2250787837592', $text="Bou")
     {
+
         $res = Http::get('https://smspro.mtn.ci/bms/Soap/Messenger.asmx/HTTP_SendSms',[
             'username'=>"AGOUA",
             "userPassword"=>"Password001",

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Hash;
@@ -68,6 +69,11 @@ class User extends \TCG\Voyager\Models\User
     {
         parent::boot();
 
+    }
+
+    public function juridiction() : BelongsTo
+    {
+        return $this->belongsTo(Juridiction::class, 'ville_id');
     }
 
 }
