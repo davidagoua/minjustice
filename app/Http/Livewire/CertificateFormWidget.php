@@ -203,13 +203,12 @@ constatant l'existence du décret "
         foreach ($requireds as $key => $field){
 
             $items[] = Components\Grid::make(['default'=>'4'])->schema([
-               Components\Placeholder::make('namesss.'.$key)->content($field)
-                   ->label("Document"),
+                Components\Placeholder::make('namesss.'.$key)->content($field)
+                       ->label("Document"),
                 Components\Hidden::make('required.'.$key)->extraAttributes(['value'=>$field]),
                 Components\TextInput::make('numerodocs.'.$key)->label("Numero du document")->required(),
                 Components\TextInput::make('dates.'.$key)->label("Date de délivrance")->type('date')->required(),
-                Components\TextInput::make('files.'.$key)->label("Fichier")->type('file')->required()
-
+                Components\TextInput::make('files.'.$key)->label("Fichier")->type('file')->required(),
             ]);
         }
         return Components\Section::make("Documents requis: ". self::typeCertificate[$this->selected_typeCertificate])
@@ -228,7 +227,7 @@ constatant l'existence du décret "
                     Components\Wizard\Step::make('Documents réquis')->schema([
 
                         Components\Radio::make('selected_typeCertificate')->options(collect(self::typeCertificate)->toArray())
-                            ->label("Type de Nationalité"),
+                            ->label("Type de Naturalisationn"),
 
 
                         $this->getDocsSection()->reactive(),
@@ -255,7 +254,7 @@ constatant l'existence du décret "
                             ->content(new HtmlString('<div class="text-center"><button type="button" class="button h-button" onclick="checkout()">Proceder au paiement</button></div>'))
                     ]),
                 ])
-                    //->submitAction(new HtmlString("<button type='submit' wire:click.prevent='save' class='button h-button btn-primary'>S'inscrire</button>"))
+                    ->submitAction(new HtmlString("<button type='submit' wire:click.prevent='save' class='button h-button btn-primary'>S'inscrire</button>"))
             ])
         ];
     }

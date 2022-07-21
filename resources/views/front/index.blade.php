@@ -74,19 +74,19 @@
                     <p class="fs-14">Avez-vous éffectuez une demande ? <a href="javascript:void(0)">Vérifiez ici</a></p>
                 </div>
                 <div class="d-grid gap-3">
-                    <a class="btn btn-dark btn-lg" href="#">
+                    <a class="btn btn-dark btn-lg" href="{{ route('register') }}">
                                 <span class="d-flex justify-content-center align-items-center">
                                     DOCUMENTS D'ETAT CIVIL
                                 </span>
                     </a>
 
-                    <a class="btn btn-dark btn-lg" href="#">
+                    <a class="btn btn-dark btn-lg" href="{{ route('register') }}">
                                 <span class="d-flex justify-content-center align-items-center">
                                     DOCUMENTS JURIDIQUE
                                 </span>
                     </a>
 
-                    <a class="btn btn-dark btn-lg" href="#">
+                    <a class="btn btn-dark btn-lg" href="{{ route('register') }}">
                                 <span class="d-flex justify-content-center align-items-center">
                                     DOCUMENTS SOCIAL ET SANTE
                                 </span>

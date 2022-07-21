@@ -37,7 +37,6 @@ class SendToValidation
 
     public function send()
     {
-        dd($this->user);
 
         $base_url = "https://documentivoire.ci";
         $res = Http::withHeaders([
