@@ -37,7 +37,7 @@
                 </tr>
                 <tr>
                     <th style="border-width: 0px">Juridiction</th>
-                    <td style="border-width: 0px">{{ $user->ville }}</td>
+                    <td style="border-width: 0px">{{ $user->juridiction->nom ?? '' }}</td>
                 </tr>
                 <tr >
                     <td columnspan="2" class="text-xl text-green-800">

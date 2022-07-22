@@ -73,7 +73,7 @@ class User extends \TCG\Voyager\Models\User
 
     public function juridiction() : BelongsTo
     {
-        return $this->belongsTo(Juridiction::class, 'ville_id');
+        return $this->belongsTo(Juridiction::class, 'ville');
     }
 
 }
