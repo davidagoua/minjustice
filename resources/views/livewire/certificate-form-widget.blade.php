@@ -19,7 +19,7 @@
                                     Télécharger mon reçu
                                 </button>
                                 <a href="/compte"  class="button h-button is-raised">
-                                    <span class="fa fa-file-download"></span>&nbsp;
+                                    <span class="fa fa-file-home"></span>&nbsp;
                                     Retourner a l'acceuil
                                 </a>
 

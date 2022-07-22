@@ -62,7 +62,7 @@ class CreateDemandeForm extends Component implements HasForms
         $state = $this->form->getState();
         $demande = new Demande();
         $demande->user()->associate(auth()->user());
-        $demande->juridiction_id = $this->juridiction;
+        $demande->juridiction_id = auth()->user()->ville;
         $demande->type_document()->associate($this->document);
         $demande->save();
         $this->paiement = Paiement::create([
@@ -120,22 +120,26 @@ class CreateDemandeForm extends Component implements HasForms
                         ])->minItems(count($document->docs))->required( count($document->docs) > 0)
                         ->defaultItems(2)->columns(4),
 
+                        /*
                         Components\Select::make('juridiction')
                             ->label("Juridiction")
                             ->options(Juridiction::all()->pluck('nom', 'id'))
-                    ]),
-                    Components\Wizard\Step::make('recap')->schema([
-                        Components\Placeholder::make('Demande de Certificat de nationalité')->content(view('form.recap_casier', [
-                            'document' => $document,
-                            'user'=> auth()->user(),
-                        ]))
+
+                        */
                     ]),
                     Components\Wizard\Step::make('Paiement')->schema([
+                        Components\Placeholder::make('Recapitulatif')->content(function($state) use ($document){
+                            return view('form.recap_casier', [
+                                'user'=> auth()->user(),
+                                'document'=> $document,
+                                'requireds'=> $this->document
+                            ]);
+                        }),
                         Components\Placeholder::make('cinetpay')->label("Paiement")
                             ->content(new HtmlString('<div class="text-center"><button type="button" class="button h-button" onclick="checkout()">Proceder au paiement</button></div>'))
                     ]),
                 ])->reactive()
-                //->submitAction(new HtmlString("<button type='submit' wire:click.prevent='save' class='button h-button btn-primary'>S'inscrire</button>"))
+                ->submitAction(new HtmlString("<button type='submit' wire:click.prevent='save' class='button h-button btn-primary'>S'inscrire</button>"))
             ])
         ];
     }

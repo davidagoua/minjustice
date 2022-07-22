@@ -95,6 +95,9 @@ Route::get('/testpdf', function(){
 });
 
 
+Route::view('/verify/{code}', 'verify')->name('verify');
 
 require __DIR__.'/auth.php';
+
+
 

@@ -232,12 +232,11 @@ constatant l'existence du décret "
 
                         $this->getDocsSection()->reactive(),
 
-                        /*
                         Components\Select::make('juridiction')
-                            ->label("Juridiction")
+                            ->label("Juridiction la plus proche")
                             ->options(Juridiction::all()->pluck('nom', 'id'))
 
-                        */
+
                     ])->reactive(),
 
 
