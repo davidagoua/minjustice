@@ -180,7 +180,7 @@ constatant l'existence du décret "
 
         Filament::notify('error', "Paiement non validé");
         SendToValidation::run(auth()->user(), $demande, $required_fields);
-        auth()->user()->notify(new DemandeRegistered($demande));
+        //auth()->user()->notify(new DemandeRegistered($demande));
     }
 
     public function download_recu()
