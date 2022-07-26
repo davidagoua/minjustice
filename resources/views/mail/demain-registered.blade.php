@@ -118,7 +118,7 @@
                                             <td style="vertical-align: middle; color: #000000; font-family: inherit; font-size: 14px; text-align: center; padding-top: 10px;">
                                                 <table align="center" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
                                                     <tr>
-                                                        <td style="vertical-align: middle; text-align: center; padding-top: 5px; padding-bottom: 5px; padding-left: 5px; padding-right: 5px;"><img align="center" alt="" class="icon" height="64" src="images/Logo.png" style="display: block; height: auto; margin: 0 auto; border: 0;" width="104"/></td>
+                                                        <td style="vertical-align: middle; text-align: center; padding-top: 5px; padding-bottom: 5px; padding-left: 5px; padding-right: 5px;"><img align="center" alt="" class="icon" height="64" src="/images/logo.png" style="display: block; height: auto; margin: 0 auto; border: 0;" width="104"/></td>
                                                     </tr>
                                                 </table>
                                             </td>

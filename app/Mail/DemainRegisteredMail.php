@@ -29,6 +29,8 @@ class DemainRegisteredMail extends Mailable
      */
     public function build()
     {
-        return $this->view('mail.demain-registered');
+        return $this->from('support@documentivoire.ci','Ministèere de la Justice')
+            ->subject('Demande enrégistrée')
+            ->view('mail.demain-registered');
     }
 }
