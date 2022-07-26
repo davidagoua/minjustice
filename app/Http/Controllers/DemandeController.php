@@ -70,7 +70,7 @@ a été validé.
 Le document est à présent en cour de traiement
           ");
 
-            Mail::to($request->user())->send(new DocumentDisponible($demande));
+            //Mail::to($request->user())->send(new DocumentDisponible($demande));
 
         }elseif ($status == 2){
             $demande->setStatus(DemandeStatus::TERMINE);
@@ -80,7 +80,7 @@ Le document est à présent en cour de traiement
            est terminé.
            Vous pouvez télécharger le document ou le retrouver dans votre juridiction
           ");
-                Mail::to($request->user())->send(new DocumentDisponible($demande));
+                //Mail::to($request->user())->send(new DocumentDisponible($demande));
             }catch (\Exception $e){
 
             }
