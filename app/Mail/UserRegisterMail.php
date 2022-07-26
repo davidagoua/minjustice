@@ -29,6 +29,8 @@ class UserRegisterMail extends Mailable
      */
     public function build()
     {
-        return $this->view('mail.user-register');
+        return $this->view('mail.user-register', [
+            'user' => $this->user
+        ]);
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Mail;
 
+use App\Models\Demande;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
@@ -16,9 +17,9 @@ class DocumentDisponible extends Mailable
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(Demande $demande)
     {
-        //
+        $this->demande = $demande;
     }
 
     /**
@@ -28,6 +29,6 @@ class DocumentDisponible extends Mailable
      */
     public function build()
     {
-        return $this->view('view.name');
+        return $this->view('mail.document-disponible');
     }
 }

@@ -1,3 +1,3 @@
 <div>
-    <h1>Email d'enregistrement </h1>
+    <h1>Bonjour Mr {{ $user->fullName }}, Bienvenue ... ! </h1>
 </div>

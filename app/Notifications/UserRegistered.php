@@ -43,11 +43,9 @@ class UserRegistered extends Notification
      */
     public function toMail($notifiable)
     {
-        return (new UserRegisterMail())
-                    ->line('Salut Mr '. $notifiable->fullName)
-                    ->line('Bienvenue sur la plateforme de declaration du ministère!')
-                    ->action('Notification Action', url('/'))
-                    ->line('Code usager: '. strtoupper(Str::random(8)) );
+        return (new UserRegisterMail($notifiable))
+            ->to($notifiable->email)
+            ->subject('Bienvenue sur le portail public du ministère de la justice');
     }
 
     /**
@@ -65,7 +63,7 @@ class UserRegistered extends Notification
 
     public function toSms($notifiable)
     {
-        $text = `Salut Mr {$notifiable->fullName}, Bienvenue sur la chaine votre OTP est ${ rand(10000, 99999)}`;
+        $text = "Salut Mme/Mlle/Mr $notifiable->fullName, Bienvenue sur la plateforme de declaration du ministère! Code usager: ". strtoupper(Str::random(8));
 
         return [
             'contact'=> $notifiable->contact,

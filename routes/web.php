@@ -86,7 +86,7 @@ Route::middleware(['auth'])->group(function(){
 });
 
 Route::get("/notitest00", function(){
-   \App\Actions\SendSMS::run();
+   \auth()->user()->notify(new \App\Notifications\UserRegistered());
 });
 
 Route::get('/testpdf', function(){

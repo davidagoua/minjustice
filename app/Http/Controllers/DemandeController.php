@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Actions\SendSMS;
+use App\Mail\DocumentDisponible;
 use App\Models\Demande;
 use App\Models\DemandeStatus;
 use App\Models\Document;
@@ -69,6 +70,8 @@ a été validé.
 Le document est à présent en cour de traiement
           ");
 
+            Mail::to($request->user())->send(new DocumentDisponible($demande));
+
         }elseif ($status == 2){
             $demande->setStatus(DemandeStatus::TERMINE);
             try{
@@ -77,6 +80,7 @@ Le document est à présent en cour de traiement
            est terminé.
            Vous pouvez télécharger le document ou le retrouver dans votre juridiction
           ");
+                Mail::to($request->user())->send(new DocumentDisponible($demande));
             }catch (\Exception $e){
 
             }
