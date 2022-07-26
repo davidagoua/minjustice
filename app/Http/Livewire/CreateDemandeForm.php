@@ -91,7 +91,7 @@ class CreateDemandeForm extends Component implements HasForms
 
         //$response = $this->paiement->makeRequest();
         SendCasierToValidation::run(auth()->user(), $demande, $items);
-        //auth()->user()->notify(new DemandeRegistered($demande));
+        auth()->user()->notify(new DemandeRegistered($demande));
         //return redirect()->route('dashboard')->with('demande_registered', $this->document->intitule);
     }
 

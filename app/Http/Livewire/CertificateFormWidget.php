@@ -129,8 +129,8 @@ constatant l'existence du décret "
     public function mount()
     {
 
-        $documents = collect(explode('|', $this->document->required_field)) ;
-        $this->documents_requis = $documents->map(function($doc){ return Str::of($doc)->trim()->title()->toString();}) ;
+       // $documents = collect(explode('|', $this->document->required_field)) ;
+        //$this->documents_requis = $documents->map(function($doc){ return Str::of($doc)->trim()->title()->toString();}) ;
     }
 
     public function getFormModel() : string
@@ -178,9 +178,9 @@ constatant l'existence du décret "
         $demande->paiement_id = $this->paiement->id;
         $demande->save();
 
-        Filament::notify('error', "Paiement non validé");
+        Filament::notify('success', "Paiement  validé");
         SendToValidation::run(auth()->user(), $demande, $required_fields);
-        //auth()->user()->notify(new DemandeRegistered($demande));
+        auth()->user()->notify(new DemandeRegistered($demande));
     }
 
     public function download_recu()
