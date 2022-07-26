@@ -2,13 +2,12 @@
 
 namespace App\Mail;
 
-use App\Models\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class DemainRegisteredMail extends Mailable
+class DocumentDisponible extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -17,9 +16,9 @@ class DemainRegisteredMail extends Mailable
      *
      * @return void
      */
-    public function __construct(User $user)
+    public function __construct()
     {
-        $this->user = $user;
+        //
     }
 
     /**
@@ -29,8 +28,6 @@ class DemainRegisteredMail extends Mailable
      */
     public function build()
     {
-        return $this->from('support@documentivoire.ci','Ministère de la Justice')
-            ->subject('Demande enrégistrée')
-            ->view('mail.demain-registered');
+        return $this->view('view.name');
     }
 }

@@ -253,7 +253,7 @@ constatant l'existence du décret "
                             ->content(new HtmlString('<div class="text-center"><button type="button" class="button h-button" onclick="checkout()">Proceder au paiement</button></div>'))
                     ]),
                 ])
-                    ->submitAction(new HtmlString("<button type='submit' wire:click.prevent='save' class='button h-button btn-primary'>S'inscrire</button>"))
+                    //->submitAction(new HtmlString("<button type='submit' wire:click.prevent='save' class='button h-button btn-primary'>S'inscrire</button>"))
             ])
         ];
     }

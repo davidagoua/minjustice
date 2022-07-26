@@ -139,7 +139,7 @@ class CreateDemandeForm extends Component implements HasForms
                             ->content(new HtmlString('<div class="text-center"><button type="button" class="button h-button" onclick="checkout()">Proceder au paiement</button></div>'))
                     ]),
                 ])->reactive()
-                ->submitAction(new HtmlString("<button type='submit' wire:click.prevent='save' class='button h-button btn-primary'>S'inscrire</button>"))
+                //submitAction(new HtmlString("<button type='submit' wire:click.prevent='save' class='button h-button btn-primary'>S'inscrire</button>"))
             ])
         ];
     }
