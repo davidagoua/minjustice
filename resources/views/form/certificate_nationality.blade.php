@@ -1,4 +1,4 @@
-@extends('base')
+    @extends('base')
 
 
 @section('content')
@@ -12,8 +12,9 @@
 @push('lscripts')
 
 <script>
+
     console.log('defined checkout')
-    var checkout = function(){
+    var checkout = function(montant){
         console.log('call')
         CinetPay.setConfig({
             apikey: '181957851560845e32d579d5.69169291',//   YOUR APIKEY
@@ -24,9 +25,9 @@
         });
         CinetPay.getCheckout({
             transaction_id: "{{ $transaction_id }}", // YOUR TRANSACTION ID
-            amount: 100,
+            amount: montant,
             currency: 'XOF',
-            channels: 'MOBILE_MONEY',
+            channels: 'ALL',
             description: 'Test de paiement',
 
 

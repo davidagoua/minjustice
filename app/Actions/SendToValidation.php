@@ -34,6 +34,7 @@ class SendToValidation
     public User $user;
     public Demande $demande;
     public array $path;
+    public $nbCopies;
 
     public function send()
     {
@@ -83,9 +84,10 @@ class SendToValidation
         }
     }
 
-    public function handle(User $user, Demande $demande, array $path)
+    public function handle(User $user, Demande $demande, array $path, $nbCopies = 1)
     {
         $this->user = $user;
+        $this->nbCopies = $nbCopies;
         $this->demande = $demande;
         $this->path = $path;
         $this->send($user, $demande);

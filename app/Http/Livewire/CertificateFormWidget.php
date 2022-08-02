@@ -106,6 +106,7 @@ constatant l'existence du décret "
     public $files = [];
     public $dates = [];
     protected array $rules = [];
+    public $nbCopies = 1;
 
     public $listeners = [
         'accepted'=>'save',
@@ -155,6 +156,7 @@ constatant l'existence du décret "
         $path = auth()->user()->fullName.'-'.$demande->id;
         $required_fields = [];
 
+
         //upload files
         foreach ($state['files'] as $key => $file){
             $lpath = Storage::disk('s3')->put($path, $file);
@@ -179,7 +181,7 @@ constatant l'existence du décret "
         $demande->save();
 
         Filament::notify('success', "Paiement  validé");
-        SendToValidation::run(auth()->user(), $demande, $required_fields);
+        SendToValidation::run(auth()->user(), $demande, $required_fields, $this->nbCopies);
         auth()->user()->notify(new DemandeRegistered($demande));
     }
 
@@ -241,19 +243,23 @@ constatant l'existence du décret "
 
 
                     Components\Wizard\Step::make('Paiement')->schema([
+                        Components\TextInput::make('nbCopies')->reactive()
+                            ->numeric()
+                            ->label("Nombre de copies")->required(),
                         Components\Placeholder::make('Recapitulatif')->content(function($state) use ($document, $selected_typeCertificate){
                             return view('form.recap_certificate', [
                                 'type_naturalisation'=> self::typeCertificate[$selected_typeCertificate],
                                 'user'=> auth()->user(),
+                                'nbCopies'=> $this->nbCopies,
                                 'document'=> $document,
                                 'requireds'=> $this->document_requis[$this->selected_typeCertificate]
                             ]);
-                        }),
-                        Components\Placeholder::make('cinetpay')->label("Paiement")
-                            ->content(new HtmlString('<div class="text-center"><button type="button" class="button h-button" onclick="checkout()">Proceder au paiement</button></div>'))
+                        })->columnSpan(2),
+                        Components\Placeholder::make('cinetpay')->label("")
+                            ->content(new HtmlString('<div class="text-center"><button type="button" class="button h-button" onclick="checkout('.(int) $this->nbCopies * (int) $this->document->montant.')">Proceder au paiement</button></div>'))
                     ]),
                 ])
-                    //->submitAction(new HtmlString("<button type='submit' wire:click.prevent='save' class='button h-button btn-primary'>S'inscrire</button>"))
+                    ->submitAction(new HtmlString("<button type='submit' wire:click.prevent='save' class='button h-button btn-primary'>S'inscrire</button>"))
             ])
         ];
     }

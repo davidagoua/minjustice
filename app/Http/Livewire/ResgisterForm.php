@@ -24,6 +24,8 @@ use \Filament\Forms\Components;
 use function PHPUnit\Framework\throwException;
 
 
+
+
 class ResgisterForm extends Component implements HasForms
 {
     use InteractsWithForms;
@@ -35,6 +37,10 @@ class ResgisterForm extends Component implements HasForms
     public $email, $password, $first_name, $last_name, $password_confirmation, $date_naissance, $lieu_naissance, $sexe;
     public $contact, $last_name_pere, $last_name_mere, $first_name_pere, $first_name_mere;
     public $date_naissance_mere, $date_naissance_pere, $lieu_naissance_mere, $lieu_naissance_pere, $situation_matrimonial;
+    public $numero_document_pere, $fichier_document_pere, $date_document_pere, $libele_document_pere;
+    public $numero_document_mere, $fichier_document_mere, $date_document_mere, $libele_document_mere;
+    public $numero_extrait, $fichier_extrait, $date_extrait;
+
 
     public function getFormModel() : string
     {
@@ -129,22 +135,33 @@ class ResgisterForm extends Component implements HasForms
                                 ->length(10)
                         ]),
 
-                        Radio::make('sexe')
-                            ->options([
-                                'Homme'=>'Homme',
-                                'Femme'=>'Femme'
-                            ])
-                            ->inline()
-                            ->label('Genre')->required(),
 
                         Grid::make(['default'=>1, 'md'=>2])->schema([
-                            Select::make('villeId')->label("Juridiction de naissance")
-                                ->options(Juridiction::all()->pluck('nom', 'id'))
-                                ->prefixIcon('heroicon-o-map')->required(),
+
                             TextInput::make('quartier')->label("Lieu d'habitation")->required()->extraInputAttributes([
                                 'onKeyUp'=>"this.value = this.value.toUpperCase();"
                             ])->placeholder('Abidjan,Cocody,Danga')->prefixIcon('heroicon-o-home'),
+
+                            Radio::make('sexe')
+                                ->options([
+                                    'Homme'=>'Homme',
+                                    'Femme'=>'Femme'
+                                ])
+                                ->label('Genre')->required(),
+
                         ]),
+
+                        Components\Section::make('Document')->schema([
+                          Grid::make(['default'=>4])->schema([
+                              Select::make('villeId')->label("Juridiction de naissance")
+                                  ->options(Juridiction::all()->pluck('nom', 'id'))->required(),
+                              TextInput::make('numero_extrait')->required()->label("Numéro de l'extrait de naissance"),
+                              TextInput::make('fichier_extrait')->type('file')->label('Extrait de naissance')->required(),
+                              Components\TextInput::make('date_extrait')
+                                  ->type('date')
+                                  ->label('Date de delivrance l\'extrait de naissance')->required(),
+                          ])
+                        ])
 
                     ]),
                     Components\Wizard\Step::make('Parental')->label('Informations de filiations')
@@ -168,6 +185,15 @@ class ResgisterForm extends Component implements HasForms
                                     ->label('Lieu de naissance du père')->extraInputAttributes([
                                         'onKeyUp'=>"this.value = this.value.toUpperCase();"
                                     ])->prefixIcon('heroicon-o-map'),
+                                Select::make('libele_document_pere')->options([
+                                   'Carte d\'identité'=>'Carte d\'identité',
+                                      'Passeport'=>'Passeport',
+
+                                ]),
+                                TextInput::make('numero_document_pere')->label('Numéro de document du père'),
+                                TextInput::make('fichier_document_pere')->type('file')->label('Document du père'),
+                                Components\TextInput::make('date_document_pere')->type('date')->label('Date de delivrance du document du père'),
+
                             ]),
                         ]),
                         Components\Section::make('Mère')->schema([
@@ -189,6 +215,14 @@ class ResgisterForm extends Component implements HasForms
                                     ->label('Lieu de naissance de la mère')->extraInputAttributes([
                                         'onKeyUp'=>"this.value = this.value.toUpperCase();"
                                     ])->prefixIcon('heroicon-o-map'),
+                                Select::make('libele_document_mere')->options([
+                                    'Carte d\'identité'=>'Carte d\'identité',
+                                    'Passeport'=>'Passeport',
+
+                                ]),
+                                TextInput::make('numero_document_mere')->label('Numéro de document du mère'),
+                                TextInput::make('fichier_document_mere')->type('file')->label('Document du mère'),
+                                Components\TextInput::make('date_document_mere')->type('date')->label('Date de delivrance du document du mère'),
                             ]),
                         ]),
                     ]),

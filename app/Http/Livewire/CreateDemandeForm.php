@@ -33,6 +33,7 @@ class CreateDemandeForm extends Component implements HasForms
     public $document_requit;
     public $isPaided = false;
     public $paiement;
+    public $nbCopies = 1;
 
     public $listeners = [
         'accepted'=>'save',
@@ -128,6 +129,11 @@ class CreateDemandeForm extends Component implements HasForms
                         */
                     ]),
                     Components\Wizard\Step::make('Paiement')->schema([
+
+                        Components\TextInput::make('nbCopies')->reactive()
+                            ->numeric()
+                            ->label("Nombre de copies")->required(),
+
                         Components\Placeholder::make('Recapitulatif')->content(function($state) use ($document){
                             return view('form.recap_casier', [
                                 'user'=> auth()->user(),
