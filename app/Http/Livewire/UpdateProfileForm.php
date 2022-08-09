@@ -30,6 +30,10 @@ class UpdateProfileForm extends Component implements HasForms
     public $first_name, $last_name, $date_naissance, $lieu_naissance, $sexe;
     public $contact, $last_name_pere, $last_name_mere, $first_name_pere, $first_name_mere;
     public $date_naissance_mere, $date_naissance_pere, $lieu_naissance_mere, $lieu_naissance_pere, $situation_matrimonial;
+    public $numero_document_pere, $fichier_document_pere, $date_document_pere, $libele_document_pere;
+    public $numero_document_mere, $fichier_document_mere, $date_document_mere, $libele_document_mere;
+    public $numero_extrait, $fichier_extrait, $date_extrait, $nbr_enfants;
+
 
     public function getFormModel() : string
     {
@@ -93,6 +97,8 @@ class UpdateProfileForm extends Component implements HasForms
                             ->length(10)
                     ]),
 
+                    TextInput::make('nbr_enfants')->label("Nombre d'enfants")->required()->numeric(),
+
                     Radio::make('sexe')
                         ->options([
                             'Homme'=>'Homme',
@@ -131,6 +137,13 @@ class UpdateProfileForm extends Component implements HasForms
                         ->label('Lieu de naissance du père')->required()->extraInputAttributes([
                             'onKeyUp'=>"this.value = this.value.toUpperCase();"
                         ]),
+                    Select::make('libele_document_pere')->options([
+                        'Carte d\'identité'=>'Carte d\'identité',
+                        'Passeport'=>'Passeport',
+                    ]),
+                    TextInput::make('numero_document_pere')->label('Numéro de document du père')->default($this->user->numero_document_pere)->required(),
+                    TextInput::make('fichier_document_pere')->type('file')->label('Document du père')->default($this->user->fichier_document_pere)->required(),
+                    Components\TextInput::make('date_document_pere')->type('date')->label('Date de delivrance du document du père')->default($this->user->date_document_pere)->required(),
                 ]),
             ]),
             Components\Section::make('Mère')->schema([
@@ -151,6 +164,16 @@ class UpdateProfileForm extends Component implements HasForms
                         ->label('Lieu de naissance de la mère')->required()->extraInputAttributes([
                             'onKeyUp'=>"this.value = this.value.toUpperCase();"
                         ]),
+                    Select::make('libele_document_mere')->options([
+                        'Carte d\'identité'=>'Carte d\'identité',
+                        'Passeport'=>'Passeport',
+
+                    ]),
+                    TextInput::make('numero_document_mere')->label('Numéro de document du mère')->default($this->user->numero_document_mere),
+                    TextInput::make('fichier_document_mere')->type('file')->label('Document du mère')->default($this->user->fichier_document_mere),
+                    Components\TextInput::make('date_document_mere')->type('date')
+                        ->default($this->user->date_document_mere)->label('Date de delivrance du document du mère'),
+
                 ]),
             ])
 

@@ -144,4 +144,10 @@ Le document est à présent en cour de traiement
         ]);
         return $pdf->download();
     }
+    public function downloadi_recu()
+    {
+
+        $pdf = \Barryvdh\DomPDF\Facade\Pdf::loadView('pdf.certest',);
+        return $pdf->download();
+    }
 }

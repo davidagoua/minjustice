@@ -82,6 +82,11 @@ Route::middleware(['auth'])->group(function(){
         'download_recu'
     ])->name('demande.download_recu');
 
+    Route::get('/ljkm', [
+        \App\Http\Controllers\DemandeController::class,
+        'downloadi_recu'
+    ])->name('demande.downloadi_recu');
+
 
 });
 

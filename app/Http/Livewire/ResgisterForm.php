@@ -40,6 +40,7 @@ class ResgisterForm extends Component implements HasForms
     public $numero_document_pere, $fichier_document_pere, $date_document_pere, $libele_document_pere;
     public $numero_document_mere, $fichier_document_mere, $date_document_mere, $libele_document_mere;
     public $numero_extrait, $fichier_extrait, $date_extrait;
+    public $profession;
 
 
     public function getFormModel() : string
@@ -60,7 +61,10 @@ class ResgisterForm extends Component implements HasForms
             $user->fill($this->form->getStateOnly([
                 'email','first_name','last_name','date_naissance','lieu_naissance','ville','quartier',
                 'situation_matrimonial','sexe','contact','date_naissance_pere','date_naissance_mere','lieu_naissance_mere',
-                'lieu_naissance_pere','first_name_mere','first_name_pere','last_name_pere','last_name_mere'
+                'lieu_naissance_pere','first_name_mere','first_name_pere','last_name_pere','last_name_mere','profession',
+                'numero_document_pere','fichier_document_pere','date_document_pere','libele_document_pere',
+                'numero_document_mere','fichier_document_mere','date_document_mere','libele_document_mere',
+                'numero_extrait','fichier_extrait','date_extrait','numero_extrait','fichier_extrait','date_extrait','nbr_enfants',
             ]));
             $user->contact = '225'.$this->contact;
             $user->register_step = 0;
@@ -141,6 +145,10 @@ class ResgisterForm extends Component implements HasForms
                             TextInput::make('quartier')->label("Lieu d'habitation")->required()->extraInputAttributes([
                                 'onKeyUp'=>"this.value = this.value.toUpperCase();"
                             ])->placeholder('Abidjan,Cocody,Danga')->prefixIcon('heroicon-o-home'),
+
+                            TextInput::make('profession')->label("Profession"),
+
+                            TextInput::make('nbr_enfants')->label("Nombre d'enfants")->required()->numeric(),
 
                             Radio::make('sexe')
                                 ->options([
