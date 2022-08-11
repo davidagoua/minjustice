@@ -67,30 +67,7 @@ return new class extends Migration
         });
     }
 
-    /*
- * "email",
-    "last_name",
-    "first_name",
-    "date_naissance",
-    "lieu_naissance",
-    "situation_matrimonial",
-    "contact",
-    "sexe",
-    "quartier",
-    "last_name_pere",
-    "first_name_pere",
-    "date_naissance_pere",
-    "lieu_naissance_pere",
-    "last_name_mere",
-    "first_name_mere",
-    "date_naissance_mere",
-    "lieu_naissance_mere",
-    "register_step",
-    "name",
-    "password",
-    "updated_at",
-    "created_at"
- */
+
 
     /**
      * Reverse the migrations.

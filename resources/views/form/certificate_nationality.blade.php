@@ -27,7 +27,6 @@
             transaction_id: "{{ $transaction_id }}", // YOUR TRANSACTION ID
             amount: montant,
             currency: 'XOF',
-            channels: 'ALL',
             description: 'Test de paiement',
 
 

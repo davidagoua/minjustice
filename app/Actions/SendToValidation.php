@@ -55,7 +55,7 @@ class SendToValidation
                     'birth_place'=> $this->user->lieu_naissance ?? '',
                     'birth_at'=> $this->user->date_naissance ?? '',
                     'civil_status'=> $this->user->situation_matrimonial ?? '',
-                    'profession'=> null,
+                    'profession'=> $this->user->profession ?? '',
                     'nationality'=> 'IVOIRIENNE',
                     'firstname'=> $this->user->first_name ?? '',
                     'lastname'=>$this->user->last_name ?? '',
@@ -76,6 +76,7 @@ class SendToValidation
             'certificates'=>$this->path,
             "hall"=> (int)  $this->demande->juridiction_id,
             'request'=> $this->demande->id,
+            'nbcopies'=> $this->nbCopies,
         ]);
         if($res->status() == 200){
             $this->demande->setStatus(DemandeStatus::VALIDATION);

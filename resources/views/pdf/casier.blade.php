@@ -16,15 +16,11 @@
 
 
 
-<h1 style="font-family: Impact; text-decoration: underline; font-weight: bold; position: absolute; top: 20%; left: 25% ">CERTIFICAT DE NATIONALITE IVOIRIENNE</h1>
+<h1 style="font-family: Impact; text-decoration: underline; font-weight: bold; position: absolute; top: 20%; left: 25% ">CASIER JUDICIAIRE</h1>
 
-<article>
+<article style="position: absolute; top: 30%; font-weight: bold">
 
-
-
-
-
-    <table class="inventory"  style="position: absolute; top: 30%; font-weight: bold">
+    <table class="inventory">
 
         <tbody>
         <tr><td><span class='filler'></span>N°<b>{{ $registre }} </b>du régistre d'ordre</td></tr>
@@ -36,6 +32,32 @@
         </tbody>
     </table>
 
+    <table>
+        <thead>
+        <tr>
+            <td>Dates des Condamnations</td>
+            <td>Cours ou tribunaux</td>
+            <td>Nature des crimes au délits</td>
+            <td>Dates précise des crimes ou délits</td>
+            <td>Nature et quantum des pieces </td>
+            <td>Date de mandat de dépot </td>
+            <td>Observations</td>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach($sentences as $s)
+            <tr>
+                <td>{{ $s->sentence_at }}</td>
+                <td>{{ $s->tribunal }}</td>
+                <td>{{ $s->crime }}</td>
+                <td>{{ $s->crime_at }}</td>
+                <td>{{ $s->quantum }}</td>
+                <td>{{ $s->deposit_at }}</td>
+                <td>{{ $s->observations }}</td>
+            </tr>
+        @endforeach
+        </tbody>
+    </table>
 
 </article>
 
@@ -46,7 +68,3 @@
 
 </body>
 </html>
-
-
-
-

@@ -113,7 +113,8 @@ Vous pouvez télécharger le document ou le retrouver dans votre juridiction.
                     'document'=> $document,
                     'registre'=> $request->json('document.number'),
                     'juridiction'=>$request->json('hall.name'),
-                    'user'=> $demande->user
+                    'user'=> $demande->user,
+                    "sentences" =>$request->sentences,
                 ]);
             }else{
                 $pdf = Pdf::loadView('pdf.certificate', [

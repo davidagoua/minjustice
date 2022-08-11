@@ -7,15 +7,15 @@
     <?php
 if (! isset($_instance)) {
     $html = \Livewire\Livewire::mount('certificate-form-widget', ['transactionId' => $transaction_id,'transaction_id' => $transaction_id])->html();
-} elseif ($_instance->childHasBeenRendered('yjMJHLq')) {
-    $componentId = $_instance->getRenderedChildComponentId('yjMJHLq');
-    $componentTag = $_instance->getRenderedChildComponentTagName('yjMJHLq');
+} elseif ($_instance->childHasBeenRendered('o01c6j0')) {
+    $componentId = $_instance->getRenderedChildComponentId('o01c6j0');
+    $componentTag = $_instance->getRenderedChildComponentTagName('o01c6j0');
     $html = \Livewire\Livewire::dummyMount($componentId, $componentTag);
-    $_instance->preserveRenderedChild('yjMJHLq');
+    $_instance->preserveRenderedChild('o01c6j0');
 } else {
     $response = \Livewire\Livewire::mount('certificate-form-widget', ['transactionId' => $transaction_id,'transaction_id' => $transaction_id]);
     $html = $response->html();
-    $_instance->logRenderedChild('yjMJHLq', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
+    $_instance->logRenderedChild('o01c6j0', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
 }
 echo $html;
 ?>
@@ -41,7 +41,6 @@ echo $html;
             transaction_id: "<?php echo e($transaction_id); ?>", // YOUR TRANSACTION ID
             amount: montant,
             currency: 'XOF',
-            channels: 'ALL',
             description: 'Test de paiement',
 
 

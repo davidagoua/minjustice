@@ -7,55 +7,62 @@
                 <tr>
                     <th style="border-width: 0px">Nom & présnoms</th>
                     <td style="border-width: 0px">
-                        {{ $user->fullName }}
+                        <?php echo e($user->fullName); ?>
+
                     </td>
                 </tr>
                 <tr>
                     <th style="border-width: 0px">Date & lieu de naissance</th>
                     <td style="border-width: 0px">
-                        {{ $user->date_naissance }} à {{ $user->lieu_naissance }}
+                        <?php echo e($user->date_naissance); ?> à <?php echo e($user->lieu_naissance); ?>
+
                     </td>
                 </tr>
                 <tr>
                     <th style="border-width: 0px">Nom & prénoms du père</th>
                     <td style="border-width: 0px">
-                        {{ $user->first_name_pere }}  {{ $user->last_name_pere }}
+                        <?php echo e($user->first_name_pere); ?>  <?php echo e($user->last_name_pere); ?>
+
                     </td>
                 </tr>
                 <tr>
                     <th style="border-width: 0px">Date et lieu naissance du père</th>
                     <td style="border-width: 0px">
-                        {{ $user->date_naissance_pere }} à {{ $user->lieu_naissance_pere }}
+                        <?php echo e($user->date_naissance_pere); ?> à <?php echo e($user->lieu_naissance_pere); ?>
+
                     </td>
                 </tr>
                 <tr>
                     <th style="border-width: 0px">Nom & prénoms de la mère</th>
                     <td style="border-width: 0px">
-                        {{ $user->first_name_mere }}  {{ $user->last_name_mere }}
+                        <?php echo e($user->first_name_mere); ?>  <?php echo e($user->last_name_mere); ?>
+
                     </td>
                 </tr>
                 <tr>
                     <th style="border-width: 0px">Date et lieu naissance de la mère</th>
                     <td style="border-width: 0px">
-                        {{ $user->date_naissance_mere }} à {{ $user->lieu_naissance_mere }}
+                        <?php echo e($user->date_naissance_mere); ?> à <?php echo e($user->lieu_naissance_mere); ?>
+
                     </td>
                 </tr>
 
                 <tr>
                     <th style="border-width: 0px">Date de la demande</th>
-                    <td style="border-width: 0px">{{ now() }}</td>
+                    <td style="border-width: 0px"><?php echo e(now()); ?></td>
                 </tr>
 
                 <tr>
                     <th style="border-width: 0px">Juridiction</th>
-                    <td style="border-width: 0px">{{ $user->juridiction->nom }}</td>
+                    <td style="border-width: 0px"><?php echo e($user->juridiction->nom); ?></td>
                 </tr>
                 <tr >
                     <td columnspan="2" class="text-xl text-green-800">
-                        Montant: {{ (int) $nbCopies * (int) $document->montant }} FCFA
+                        Montant: <?php echo e((int) $nbCopies * (int) $document->montant); ?> FCFA
                     </td>
                 </tr>
             </table>
         </div>
     </div>
 </div>
+<?php /**PATH C:\Users\user\PhpstormProjects\minijust\resources\views/form/recap_casier.blade.php ENDPATH**/ ?>

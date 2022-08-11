@@ -34,6 +34,7 @@ class CreateDemandeForm extends Component implements HasForms
     public $isPaided = false;
     public $paiement;
     public $nbCopies = 1;
+    public $docnum, $date_delivrance;
 
     public $listeners = [
         'accepted'=>'save',
@@ -70,7 +71,7 @@ class CreateDemandeForm extends Component implements HasForms
             'user_id' => auth()->id(),
             'demande_id' => $demande->id,
             'reference' => Str::random(10),
-            'montant' => 100,
+            'montant' => $demande->type_document->montant,
             'contact' => $this->contact_debit,
         ]);
 
@@ -83,9 +84,9 @@ class CreateDemandeForm extends Component implements HasForms
         foreach($state['document_requit'] as $key=>$reqs){
             $lpath = Storage::disk('s3')->put($path, $reqs['document_requis']);
             $items[] = [
-                'code'=> $reqs['docnum'],
+                'code'=> $this->docnum,
                 'path'=> $lpath,
-                'issue_at'=> $reqs['date_delivrance'],
+                'issue_at'=> $this->date_delivrance,
                 'type'=> $file->originalName ?? 'document'.$key
             ];
         }
@@ -103,30 +104,20 @@ class CreateDemandeForm extends Component implements HasForms
             Components\Card::make()->schema([
                 Components\Wizard::make([
                     Components\Wizard\Step::make('Documents réquis')->schema([
-                        Components\Placeholder::make('Informations')->content(function($state) use ($document){
-                            return view('filaments.demande.information', compact('document'));
-                        }),
-                        Components\Repeater::make('document_requit')->schema([
-                            Components\Select::make('document')->options([
-                                'Extrait de naissance',
-                                'Certificat de nationalité',
-                                "Attestation d'identité"
-                            ]),
+
+                        Components\Grid::make(['default'=>4])->schema([
+                            Components\Placeholder::make('document')
+                                ->label('document')
+                                ->content("Extrait de naissance"),
                             Components\TextInput::make('docnum')->label("Numéro du document")->required(),
                             Components\TextInput::make('date_delivrance')->label("Date de délivrance")
                                 ->type('date'),
                             Components\TextInput::make('document_requis')
                                 ->type('file'),
 
-                        ])->minItems(count($document->docs))->required( count($document->docs) > 0)
-                        ->defaultItems(2)->columns(4),
+                        ]),
 
-                        /*
-                        Components\Select::make('juridiction')
-                            ->label("Juridiction")
-                            ->options(Juridiction::all()->pluck('nom', 'id'))
 
-                        */
                     ]),
                     Components\Wizard\Step::make('Paiement')->schema([
 
@@ -138,6 +129,7 @@ class CreateDemandeForm extends Component implements HasForms
                             return view('form.recap_casier', [
                                 'user'=> auth()->user(),
                                 'document'=> $document,
+                                'nbCopies'=> $this->nbCopies,
                                 'requireds'=> $this->document
                             ]);
                         }),

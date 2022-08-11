@@ -229,7 +229,7 @@ constatant l'existence du décret "
                     Components\Wizard\Step::make('Documents réquis')->schema([
 
                         Components\Radio::make('selected_typeCertificate')->options(collect(self::typeCertificate)->toArray())
-                            ->label("Type de Naturalisationn"),
+                            ->label("Type de Naturalisation"),
 
 
                         $this->getDocsSection()->reactive(),
