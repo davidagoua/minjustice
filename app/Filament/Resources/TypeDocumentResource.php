@@ -26,11 +26,11 @@ class TypeDocumentResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('intitule')->required(),
-                Forms\Components\TextInput::make('type')->required(),
+                Forms\Components\TextInput::make('intitule'),
+                Forms\Components\TextInput::make('type'),
                 Forms\Components\TextInput::make('specificite'),
                 Forms\Components\TextInput::make('montant')->numeric(),
-                Forms\Components\TagsInput::make('documents_requis')->required(),
+                Forms\Components\TagsInput::make('documents_requis'),
             ]);
     }
 
