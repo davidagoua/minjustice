@@ -29,6 +29,7 @@ class TypeDocumentResource extends Resource
                 Forms\Components\TextInput::make('intitule')->required(),
                 Forms\Components\TextInput::make('type')->required(),
                 Forms\Components\TextInput::make('specificite'),
+                Forms\Components\TextInput::make('montant')->numeric(),
                 Forms\Components\TagsInput::make('documents_requis')->required(),
             ]);
     }
@@ -39,6 +40,7 @@ class TypeDocumentResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('intitule'),
                 Tables\Columns\TextColumn::make('type'),
+                Tables\Columns\TextColumn::make('montant'),
                 Tables\Columns\TextColumn::make('specificite'),
                 Tables\Columns\BadgeColumn::make('documents_requis'),
             ])
