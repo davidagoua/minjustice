@@ -40,7 +40,7 @@ class ResgisterForm extends Component implements HasForms
     public $numero_document_pere, $fichier_document_pere, $date_document_pere, $libele_document_pere;
     public $numero_document_mere, $fichier_document_mere, $date_document_mere, $libele_document_mere;
     public $numero_extrait, $fichier_extrait, $date_extrait;
-    public $profession;
+    public $profession, $nbr_enfants;
 
 
     public function getFormModel() : string
@@ -48,14 +48,28 @@ class ResgisterForm extends Component implements HasForms
         return User::class;
     }
 
-    public function like()
+    public function mount()
     {
-        $this->like++;
+        $this->form->fill([
+            'email'=>'test@mail.com',
+            'password'=>'password',
+            'first_name'=>'test',
+            'last_name'=>'test',
+            'password_confirmation'=>'password',
+            'date_naissance'=>'2022-01-01',
+            'lieu_naissance'=>'test',
+            'sexe'=>'M',
+            'contact'=>'test',
+            'last_name_pere'=>'test',
+        ]);
     }
+
+
 
     public function save()
     {
         try{
+            $this->form->validate();
             DB::beginTransaction();
             $user = new User();
             $user->fill($this->form->getStateOnly([
@@ -76,7 +90,7 @@ class ResgisterForm extends Component implements HasForms
 
             $user->notify(new UserRegistered());
         }catch (\Exception $e){
-            throwException($e);
+            return throwException($e);
         } finally {
             return redirect()->route('dashboard');
         }
