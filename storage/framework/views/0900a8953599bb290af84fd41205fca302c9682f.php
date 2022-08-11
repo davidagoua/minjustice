@@ -7,7 +7,7 @@
                     <div class="action-box">
                         <div class="box-content">
 
-                            <h3 class="dark-inverted">Votre demande de Certificat a été prix en compte !</h3>
+                            <h3 class="dark-inverted">Votre demande de Certificat a été prise en compte !</h3>
                             <div class="sender-message is-dark-card-bordered is-dark-bg-4">
                                 <h4 class="dark-inverted">IMPORTANT</h4>
                                 <p>Veuillez vous rendre dans votre juridiction avec les originaux pour la validation des documents</p>

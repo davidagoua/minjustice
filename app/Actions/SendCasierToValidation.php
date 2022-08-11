@@ -56,10 +56,11 @@ class SendCasierToValidation
                         'birth_at'=> $this->user->date_naissance ?? "",
                         'civil_status'=> $this->user->civilStatus,
                         'profession'=> $this->user->profession ?? "",
-                        'sexe'=> $this->user->sexe ,
+                        'sex'=> $this->user->sexe == 'Homme' ? 'M': 'F' ,
                         'nationality'=> 'IVOIRIENNE',
                         'firstname'=> $this->user->first_name ?? "",
                         'lastname'=>$this->user->last_name ?? "",
+                        'children' => $this->user->nbr_enfants ?? 0,
                     ],
                     'father'=>[
                         'firstname'=>$this->user->first_name_pere ?? "",
@@ -78,7 +79,7 @@ class SendCasierToValidation
                 "hall"=>  1,
                 'request'=> $this->demande->id,
                 'nbcopies'=> $this->nbCopies,
-                'nbr_enfants' => $this->user->nbr_enfants ?? 0,
+
             ]);
         if($res->status() == 200){
             $this->demande->setStatus(DemandeStatus::VALIDATION);
