@@ -76,12 +76,12 @@ Le document est à présent en cour de traiement.
             $demande->setStatus(DemandeStatus::TERMINE);
             try{
                 //$demande->user->notify(new DemandeTerminee($demande));
-                /*
+
                 SendSMS::run($demande->user->contact, "Bonjour chère {$demande->user->fullName}, Votre demande de document [{$demande->type_document->intitule}]
-est terminé.
-Vous pouvez télécharger le document ou le retrouver dans votre juridiction.
+a été validé.
+Le document est à présent en cour de traiement.
           ");
-                */
+
                 //Mail::to($request->user())->send(new DocumentDisponible($demande));
             }catch (\Exception $e){
 

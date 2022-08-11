@@ -106,7 +106,7 @@ class CreateDemandeForm extends Component implements HasForms
                         Components\Grid::make(['default'=>4])->schema([
                             Components\Placeholder::make('document')
                                 ->label('document')
-                                ->content("Extrait de naissance"),
+                                ->content("Extrait d'acte de naissance"),
                             Components\TextInput::make('docnum')->label("Numéro du document")->required(),
                             Components\TextInput::make('date_delivrance')->label("Date de délivrance")
                                 ->type('date'),

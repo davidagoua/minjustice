@@ -188,7 +188,8 @@ constatant l'existence du décret "
     public function download_recu()
     {
         return redirect()->route('demande.download_recu',[
-            'paiement'=> $this->paiement
+            'paiement'=> $this->paiement,
+            'nbCopies'=> $this->nbCopies
         ]);
     }
 

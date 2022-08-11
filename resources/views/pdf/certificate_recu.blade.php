@@ -27,7 +27,7 @@
     <table class="inventory" style="position: absolute; top: 30%; font-weight: bold">
 
         <tbody>
-        <tr><td><span class='recus'></span>NUMERO TRANSACTION : <b>{{ $paiement->reference }} </b></td></tr>
+        <tr><td><span class='recus'></span>NUMERO TRANSACTION : <b>{{ (int) $paiement->reference * (int) $nbCopie }} </b></td></tr>
         <tr><td><span class='recus'></span>MONTANT :  <strong> {{ $type_document->montant }} FCFA </strong></td></tr>
         <tr><td><span class='recus'></span>TYPE DE DEMANDE : ETABLISSEMENT D'UN {{ strtoupper($type_document->intitule) ?? 'CERTIFICAT DE NATIONALITE' }}</td></tr>
         <tr><td><span class='recus'></span>DEMANDEUR :<strong>{{ ucfirst(auth()->user()->fullName)  }}</strong> </td></tr>
