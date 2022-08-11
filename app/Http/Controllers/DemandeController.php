@@ -76,10 +76,12 @@ Le document est à présent en cour de traiement.
             $demande->setStatus(DemandeStatus::TERMINE);
             try{
                 //$demande->user->notify(new DemandeTerminee($demande));
+                /*
                 SendSMS::run($demande->user->contact, "Bonjour chère {$demande->user->fullName}, Votre demande de document [{$demande->type_document->intitule}]
 est terminé.
 Vous pouvez télécharger le document ou le retrouver dans votre juridiction.
           ");
+                */
                 //Mail::to($request->user())->send(new DocumentDisponible($demande));
             }catch (\Exception $e){
 
@@ -108,14 +110,18 @@ Vous pouvez télécharger le document ou le retrouver dans votre juridiction.
 
             //filtre par type de document
 
+
             if($document->type->intitule == "Casier Judiciaire"){
+
                 $pdf = Pdf::loadView('pdf.casier', [
                     'document'=> $document,
                     'registre'=> $request->json('document.number'),
                     'juridiction'=>$request->json('hall.name'),
                     'user'=> $demande->user,
-                    "sentences" =>$request->sentences,
+                    "sentences" =>$request->json('document.sentences'),
                 ]);
+
+
             }else{
                 $pdf = Pdf::loadView('pdf.certificate', [
                     'document'=> $document,

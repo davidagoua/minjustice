@@ -16,7 +16,7 @@
 
 
 
-<h1 style="font-family: Impact; text-decoration: underline; font-weight: bold; position: absolute; top: 20%; left: 25% ">CASIER JUDICIAIRE</h1>
+<h1 style="font-family: Impact; text-decoration: underline; font-weight: bold; position: absolute; top: 20%; left: 40% ">CASIER JUDICIAIRE</h1>
 
 <article style="position: absolute; top: 30%; font-weight: bold">
 
@@ -32,8 +32,7 @@
         </tbody>
     </table>
 
-    <table>
-        <thead>
+    <table class="table w-full" style="width: 680px; background-color: rgba(230,230,230,0.7)" border="1">
         <tr>
             <td>Dates des Condamnations</td>
             <td>Cours ou tribunaux</td>
@@ -43,20 +42,17 @@
             <td>Date de mandat de dépot </td>
             <td>Observations</td>
         </tr>
-        </thead>
-        <tbody>
         @foreach($sentences as $s)
             <tr>
-                <td>{{ $s->sentence_at }}</td>
-                <td>{{ $s->tribunal }}</td>
-                <td>{{ $s->crime }}</td>
-                <td>{{ $s->crime_at }}</td>
-                <td>{{ $s->quantum }}</td>
-                <td>{{ $s->deposit_at }}</td>
-                <td>{{ $s->observations }}</td>
+                <td>{{ $s['sentence_at'] }}</td>
+                <td>{{ $s['tribunal'] }}</td>
+                <td>{{ $s['crime'] }}</td>
+                <td>{{ substr($s['crime_at'], 0, 10)  }}</td>
+                <td>{{ $s['quantum'] }}</td>
+                <td>{{ substr($s['deposit_at'], 0, 10)  }}</td>
+                <td>{{ $s['observations'] }}</td>
             </tr>
         @endforeach
-        </tbody>
     </table>
 
 </article>

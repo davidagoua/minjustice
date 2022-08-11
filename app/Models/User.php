@@ -76,4 +76,9 @@ class User extends \TCG\Voyager\Models\User
         return $this->belongsTo(Juridiction::class, 'ville');
     }
 
+    public function getCivilStatusAttribute()
+    {
+        return $this->situation_matrimonial == 'Celibataire' ? 'single' : 'married';
+    }
+
 }
