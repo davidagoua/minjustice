@@ -34,6 +34,7 @@ class SendCasierToValidation
     public User $user;
     public Demande $demande;
     public array $path;
+    public $nbCopies = 1;
 
     public function send()
     {
@@ -75,17 +76,19 @@ class SendCasierToValidation
                 'certificates'=>$this->path,
                 "hall"=>  1,
                 'request'=> $this->demande->id,
+                'nbcopies'=> $this->nbCopies,
             ]);
         if($res->status() == 200){
             $this->demande->setStatus(DemandeStatus::VALIDATION);
         }
     }
 
-    public function handle(User $user, Demande $demande, array $path)
+    public function handle(User $user, Demande $demande, array $path, $nbCopies)
     {
         $this->user = $user;
         $this->demande = $demande;
         $this->path = $path;
-        $this->send($user, $demande);
+        $this->nbCopies = $nbCopies;
+        $this->send();
     }
 }
