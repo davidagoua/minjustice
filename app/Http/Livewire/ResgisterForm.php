@@ -89,10 +89,9 @@ class ResgisterForm extends Component implements HasForms
             Auth::login($user);
 
             $user->notify(new UserRegistered());
-        }catch (\Exception $e){
-            return throwException($e);
-        } finally {
             return redirect()->route('dashboard');
+        }catch (\Exception $e){
+            dd($e->getMessage());
         }
 
 

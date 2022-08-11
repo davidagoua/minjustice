@@ -57,11 +57,12 @@ return new class extends Migration
             $table->string('numero_document_mere')->nullable();
             $table->string('fichier_document_mere')->nullable();
             $table->dateTime('date_document_mere')->nullable();
-            $table->dateTime('libele_document_mere')->nullable();
+            $table->string('libele_document_mere')->nullable();
 
             $table->string('numero_extrait')->nullable();
             $table->string('fichier_extrait')->nullable();
             $table->string('date_extrait')->nullable();
+
 
         });
     }
