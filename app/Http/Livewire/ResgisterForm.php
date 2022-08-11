@@ -50,18 +50,7 @@ class ResgisterForm extends Component implements HasForms
 
     public function mount()
     {
-        $this->form->fill([
-            'email'=>'test@mail.com',
-            'password'=>'password',
-            'first_name'=>'test',
-            'last_name'=>'test',
-            'password_confirmation'=>'password',
-            'date_naissance'=>'2022-01-01',
-            'lieu_naissance'=>'test',
-            'sexe'=>'M',
-            'contact'=>'test',
-            'last_name_pere'=>'test',
-        ]);
+
     }
 
 
