@@ -230,9 +230,9 @@ class ResgisterForm extends Component implements HasForms
                                     'Passeport'=>'Passeport',
 
                                 ]),
-                                TextInput::make('numero_document_mere')->label('Numéro de document du mère'),
-                                TextInput::make('fichier_document_mere')->type('file')->label('Document du mère'),
-                                Components\TextInput::make('date_document_mere')->type('date')->label('Date de delivrance du document du mère'),
+                                TextInput::make('numero_document_mere')->label('Numéro de document de la mère'),
+                                TextInput::make('fichier_document_mere')->type('file')->label('Document de la mère'),
+                                Components\TextInput::make('date_document_mere')->type('date')->label('Date de delivrance du document de la mère'),
                             ]),
                         ]),
                     ]),

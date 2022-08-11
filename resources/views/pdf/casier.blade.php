@@ -24,7 +24,7 @@
 
 
 
-    <table class="inventory">
+    <table class="inventory"  style="position: absolute; top: 30%; font-weight: bold">
 
         <tbody>
         <tr><td><span class='filler'></span>N°<b>{{ $registre }} </b>du régistre d'ordre</td></tr>

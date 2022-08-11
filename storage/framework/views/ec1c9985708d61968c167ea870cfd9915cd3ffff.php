@@ -1,0 +1,3 @@
+<svg x-show="! ['danger', 'success', 'warning'].includes(notification.status)" x-bind="iconClasses" class="shrink-0 w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+</svg><?php /**PATH C:\Users\user\PhpstormProjects\minijust\storage\framework\views/ed871d763560dbfca7ba5b0273753e4be183a97b.blade.php ENDPATH**/ ?>

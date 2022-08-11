@@ -38,7 +38,7 @@ class CertificateFormWidget extends Component implements HasForms
         [
             "Extrait d'acte de naissance",
             "un certificat de nationalité
-ivoirienne ou d’une carte nationalité d'identité ou par témoignage"
+ivoirienne, une carte nationalité d'identité ou un témoignage"
         ],
         [
             "un extrait d'acte de naissance de l’intéressé","copie du document acquisitif de la nationalité du père et/ou de la mère ",
