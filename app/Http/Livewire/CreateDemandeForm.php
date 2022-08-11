@@ -81,15 +81,13 @@ class CreateDemandeForm extends Component implements HasForms
         $items = [];
         $path = auth()->user()->fullName.'-'.$demande->id;
 
-        foreach($state['document_requit'] as $key=>$reqs){
-            $lpath = Storage::disk('s3')->put($path, $reqs['document_requis']);
-            $items[] = [
-                'code'=> $this->docnum,
-                'path'=> $lpath,
-                'issue_at'=> $this->date_delivrance,
-                'type'=> $file->originalName ?? 'document'.$key
-            ];
-        }
+        $lpath = Storage::disk('s3')->put($path, $this->document_requis);
+        $items[] = [
+            'code'=> $this->docnum,
+            'path'=> $lpath,
+            'issue_at'=> $this->date_delivrance,
+            'type'=> $file->originalName ?? 'document'
+        ];
 
         //$response = $this->paiement->makeRequest();
         SendCasierToValidation::run(auth()->user(), $demande, $items);
