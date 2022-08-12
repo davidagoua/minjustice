@@ -66,7 +66,7 @@ class DemandeRegistered extends Notification
         $type_doc = $this->demande->type_document->intitule;
         $payloads = [
             'contact'=> auth()->user()->contact,
-            'text'=> "Bonjour Chèr. {$user->fullName} \n Votre demande de {$type_doc} a été enrégistré. Vous serez invité a vous rendre a la juridiction avec les originaux de vos documents"
+            'text'=> "Bonjour Chèr(e) {$user->fullName} \n Votre demande de {$type_doc} a été enrégistrée. Vous serez invité a vous rendre a la juridiction avec les originaux de vos documents"
         ];
         return $payloads;
     }

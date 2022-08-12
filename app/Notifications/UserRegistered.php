@@ -63,7 +63,7 @@ class UserRegistered extends Notification
 
     public function toSms($notifiable)
     {
-        $text = "Salut Mme/Mlle/Mr $notifiable->fullName, Bienvenue sur la plateforme de declaration du ministère de la justice ";
+        $text = "Bonjour Mme/Mlle/Mr $notifiable->fullName, Bienvenue sur la plateforme de declaration du ministère de la justice ";
 
         return [
             'contact'=> $notifiable->contact,
