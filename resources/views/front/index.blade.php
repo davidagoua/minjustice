@@ -190,7 +190,6 @@
                     <div class="home-heading">
                         <h1 class="mb-3 text-white">Obtenez vos documents administratifs en ligne <span class="text-warning">Ministère de la justice</span></h1>
                     </div>
-                    <p class="text-white-50 fs-20">Explore and learn more about everything from machine learning and global payments to scaling your team.</p>
                     <div class="home-btn hstack gap-2 flex-column d-sm-block">
                         <a class="btn btn-primary me-1" data-bs-toggle="modal" data-bs-target="#exampleModalLong"  href="javascript:void(0)"><i class="mdi mdi-file-document-outline"></i> Effectuer une demande</a>
                         <a class="btn btn-white me-1" href="#download">Télécharger l'application <i class="mdi mdi-download"></i></a>
