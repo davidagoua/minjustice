@@ -163,7 +163,7 @@
                                             <span class="tag is-rounded is-success">Terminé</span>
                                                 @break
                                                 @case(\App\Models\DemandeStatus::ECHEC)
-                                            <span class="tag is-rounded is-danger">Terminé</span>
+                                            <span class="tag is-rounded is-danger">Echec</span>
                                                 @break
                                                 @default
                                             <span class="tag is-rounded is-success">Indefini</span>

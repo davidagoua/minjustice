@@ -27,9 +27,8 @@
             transaction_id: "{{ $transaction_id }}", // YOUR TRANSACTION ID
             amount: montant,
             currency: 'XOF',
+            channels: 'MOBILE_MONEY',
             description: 'Test de paiement',
-
-
         });
         CinetPay.waitResponse(function(data) {
             if (data.status == "REFUSED") {

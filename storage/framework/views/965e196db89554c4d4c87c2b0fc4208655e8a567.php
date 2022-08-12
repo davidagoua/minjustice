@@ -161,7 +161,7 @@
                                             <span class="tag is-rounded is-success">Terminé</span>
                                                 <?php break; ?>
                                                 <?php case (\App\Models\DemandeStatus::ECHEC): ?>
-                                            <span class="tag is-rounded is-danger">Terminé</span>
+                                            <span class="tag is-rounded is-danger">Echec</span>
                                                 <?php break; ?>
                                                 <?php default: ?>
                                             <span class="tag is-rounded is-success">Indefini</span>

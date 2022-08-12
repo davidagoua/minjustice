@@ -56,7 +56,7 @@ class SendToValidation
                     'birth_at'=> $this->user->date_naissance ?? '',
                     'civil_status'=> $this->user->civilStatus,
                     'profession'=> $this->user->profession ?? '',
-                    'sex'=> $this->user->sexe,
+                    'sex'=> $this->user->sexe == 'Homme' ? 'M' : 'F',
                     'children' => $this->user->nbr_enfants ?? 0,
                     'nationality'=> 'IVOIRIENNE',
                     'firstname'=> $this->user->first_name ?? '',

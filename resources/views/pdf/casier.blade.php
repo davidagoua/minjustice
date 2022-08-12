@@ -32,7 +32,7 @@
         </tbody>
     </table>
 
-    <table class="table w-full" style="width: 680px; background-color: rgba(230,230,230,0.7)" border="1">
+    <table class="table w-full" style="width: 680px;" border="1">
         <tr>
             <td>Dates des Condamnations</td>
             <td>Cours ou tribunaux</td>

@@ -15,7 +15,7 @@
 
     <script>
         console.log('defined checkout')
-        var checkout = function(){
+        var checkout = function(montant){
             console.log('call')
             CinetPay.setConfig({
                 apikey: '181957851560845e32d579d5.69169291',//   YOUR APIKEY
@@ -26,12 +26,10 @@
             });
             CinetPay.getCheckout({
                 transaction_id: "{{ $transaction_id }}", // YOUR TRANSACTION ID
-                amount: 100,
+                amount: montant,
                 currency: 'XOF',
                 channels: 'MOBILE_MONEY',
                 description: 'Test de paiement',
-
-
             });
             CinetPay.waitResponse(function(data) {
                 if (data.status == "REFUSED") {

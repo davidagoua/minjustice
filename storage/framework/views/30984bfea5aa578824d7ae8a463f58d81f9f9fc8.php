@@ -7,15 +7,15 @@
     <?php
 if (! isset($_instance)) {
     $html = \Livewire\Livewire::mount('certificate-form-widget', ['transactionId' => $transaction_id,'transaction_id' => $transaction_id])->html();
-} elseif ($_instance->childHasBeenRendered('o01c6j0')) {
-    $componentId = $_instance->getRenderedChildComponentId('o01c6j0');
-    $componentTag = $_instance->getRenderedChildComponentTagName('o01c6j0');
+} elseif ($_instance->childHasBeenRendered('BujJTmH')) {
+    $componentId = $_instance->getRenderedChildComponentId('BujJTmH');
+    $componentTag = $_instance->getRenderedChildComponentTagName('BujJTmH');
     $html = \Livewire\Livewire::dummyMount($componentId, $componentTag);
-    $_instance->preserveRenderedChild('o01c6j0');
+    $_instance->preserveRenderedChild('BujJTmH');
 } else {
     $response = \Livewire\Livewire::mount('certificate-form-widget', ['transactionId' => $transaction_id,'transaction_id' => $transaction_id]);
     $html = $response->html();
-    $_instance->logRenderedChild('o01c6j0', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
+    $_instance->logRenderedChild('BujJTmH', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
 }
 echo $html;
 ?>
@@ -41,9 +41,8 @@ echo $html;
             transaction_id: "<?php echo e($transaction_id); ?>", // YOUR TRANSACTION ID
             amount: montant,
             currency: 'XOF',
+            channels: 'MOBILE_MONEY',
             description: 'Test de paiement',
-
-
         });
         CinetPay.waitResponse(function(data) {
             if (data.status == "REFUSED") {

@@ -8,15 +8,15 @@
         <?php
 if (! isset($_instance)) {
     $html = \Livewire\Livewire::mount('create-demande-form', ['transactionId' => $transaction_id,'transaction_id' => $transaction_id,'document' => $document])->html();
-} elseif ($_instance->childHasBeenRendered('mAcT6Oq')) {
-    $componentId = $_instance->getRenderedChildComponentId('mAcT6Oq');
-    $componentTag = $_instance->getRenderedChildComponentTagName('mAcT6Oq');
+} elseif ($_instance->childHasBeenRendered('g0gt0ZR')) {
+    $componentId = $_instance->getRenderedChildComponentId('g0gt0ZR');
+    $componentTag = $_instance->getRenderedChildComponentTagName('g0gt0ZR');
     $html = \Livewire\Livewire::dummyMount($componentId, $componentTag);
-    $_instance->preserveRenderedChild('mAcT6Oq');
+    $_instance->preserveRenderedChild('g0gt0ZR');
 } else {
     $response = \Livewire\Livewire::mount('create-demande-form', ['transactionId' => $transaction_id,'transaction_id' => $transaction_id,'document' => $document]);
     $html = $response->html();
-    $_instance->logRenderedChild('mAcT6Oq', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
+    $_instance->logRenderedChild('g0gt0ZR', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
 }
 echo $html;
 ?>
@@ -27,7 +27,7 @@ echo $html;
 
     <script>
         console.log('defined checkout')
-        var checkout = function(){
+        var checkout = function(montant){
             console.log('call')
             CinetPay.setConfig({
                 apikey: '181957851560845e32d579d5.69169291',//   YOUR APIKEY
@@ -38,7 +38,7 @@ echo $html;
             });
             CinetPay.getCheckout({
                 transaction_id: "<?php echo e($transaction_id); ?>", // YOUR TRANSACTION ID
-                amount: 100,
+                amount: montant,
                 currency: 'XOF',
                 channels: 'MOBILE_MONEY',
                 description: 'Test de paiement',

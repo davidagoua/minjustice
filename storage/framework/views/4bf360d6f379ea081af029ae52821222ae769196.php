@@ -16,7 +16,7 @@
 
 
 
-<h1 style="font-family: Impact; text-decoration: underline; font-weight: bold; position: absolute; top: 20%; left: 25% ">CERTIFICAT DE NATIONALITE IVOIRIENNE</h1>
+<h1 style="font-family: Impact; text-decoration: underline; font-weight: bold; position: absolute; top: 20%; left: 40% ">RECU DE PAIEMENT</h1>
 
 <article>
 
@@ -28,7 +28,7 @@
 
         <tbody>
         <tr><td><span class='recus'></span>NUMERO TRANSACTION : <b><?php echo e($paiement->reference); ?> </b></td></tr>
-        <tr><td><span class='recus'></span>MONTANT :  <strong> <?php echo e($type_document->montant); ?> FCFA </strong></td></tr>
+        <tr><td><span class='recus'></span>MONTANT :  <strong> <?php echo e((int) $type_document->montant * (int) $nbCopie); ?> FCFA </strong></td></tr>
         <tr><td><span class='recus'></span>TYPE DE DEMANDE : ETABLISSEMENT D'UN <?php echo e(strtoupper($type_document->intitule) ?? 'CERTIFICAT DE NATIONALITE'); ?></td></tr>
         <tr><td><span class='recus'></span>DEMANDEUR :<strong><?php echo e(ucfirst(auth()->user()->fullName)); ?></strong> </td></tr>
         <tr><td><span class='recus'></span>DATE NAISSANCE :<strong></strong> <?php echo e(auth()->user()->date_naissance); ?> </td></tr>

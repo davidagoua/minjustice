@@ -78,7 +78,7 @@ Le document est à présent en cour de traiement.
                 //$demande->user->notify(new DemandeTerminee($demande));
 
                 SendSMS::run($demande->user->contact, "Bonjour chère {$demande->user->fullName}, Votre demande de document [{$demande->type_document->intitule}]
-est terminée. Vous pouvez le retrouver dans votre espace personnel.");
+est terminée. Vous pouvez le retrouver dans votre espace personnel .");
 
                 //Mail::to($request->user())->send(new DocumentDisponible($demande));
             }catch (\Exception $e){
@@ -145,7 +145,8 @@ est terminée. Vous pouvez le retrouver dans votre espace personnel.");
         $type_document = $paiement->demande->type_document;
 
         $pdf = \Barryvdh\DomPDF\Facade\Pdf::loadView('pdf.certificate_recu',[
-            'paiement'=>$paiement, 'demande'=>$demande, 'type_document'=>$type_document
+            'paiement'=>$paiement, 'demande'=>$demande, 'type_document'=>$type_document,
+            'nbCopie'=> $request->input('nbCopies')
         ]);
         return $pdf->download();
     }
