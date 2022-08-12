@@ -46,6 +46,7 @@ class UpdateProfileForm extends Component implements HasForms
             'first_name','last_name','date_naissance','lieu_naissance','sexe','contact','quartier','villeId',
             'first_name_pere','last_name_pere','date_naissance_pere','lieu_naissance_pere','situation_matrimonial',
             'first_name_mere','last_name_mere','lieu_naissance_mere','date_naissance_mere',
+            'numero_document_pere','fichier_document_pere',''
         ]));
     }
 

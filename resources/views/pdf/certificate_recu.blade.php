@@ -32,7 +32,7 @@
         <tr><td><span class='recus'></span>TYPE DE DEMANDE : ETABLISSEMENT D'UN {{ strtoupper($type_document->intitule) ?? 'CERTIFICAT DE NATIONALITE' }}</td></tr>
         <tr><td><span class='recus'></span>DEMANDEUR :<strong>{{ ucfirst(auth()->user()->fullName)  }}</strong> </td></tr>
         <tr><td><span class='recus'></span>DATE NAISSANCE :<strong></strong> {{ auth()->user()->date_naissance }} </td></tr>
-        <tr><td><span class='recus'></span>LIEU DE NAISSANCE :<strong>{{ auth()->user()->date_naissance }} </strong></td></tr>
+        <tr><td><span class='recus'></span>LIEU DE NAISSANCE :<strong>{{ auth()->user()->lieu_naissance }} </strong></td></tr>
         <tr><td><span class='recus'></span>DATE DE LA DEMANDE :<strong>{{ \Carbon\Carbon::make($demande->created_at)->format('d/m/y')  }} </strong>  </td></tr>
 
         </tbody>

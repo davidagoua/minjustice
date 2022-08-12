@@ -135,7 +135,6 @@ est terminée. Vous pouvez le retrouver dans votre espace personnel .");
         }
         return response()->json([
             'message'=>"ok",
-            'path'=> $document->path
         ], 200);
     }
 

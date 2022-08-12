@@ -44,7 +44,7 @@
         </tr>
         @foreach($sentences as $s)
             <tr>
-                <td>{{ $s['sentence_at'] }}</td>
+                <td>{{ substr($s['sentence_at'], 0, 10)  }}</td>
                 <td>{{ $s['tribunal'] }}</td>
                 <td>{{ $s['crime'] }}</td>
                 <td>{{ substr($s['crime_at'], 0, 10)  }}</td>
